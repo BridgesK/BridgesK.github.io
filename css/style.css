@@ -2110,7 +2110,7 @@ code {
 pre code {
   border: none;
   display: block;
-  padding: 0;
+  padding: 4;
 }
 .highlight {
   font-family: "Menlo", monospace;
