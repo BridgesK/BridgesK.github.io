@@ -2744,6 +2744,9 @@ ul.breadcrumb li:last-child {
 .comments {
   padding: 40px;
 }
+.post-block {
+  background: rgba(255,255,255,0.6) none repeat scroll !important;
+}
 .post-eof {
   display: none;
 }
@@ -2797,15 +2800,12 @@ body {
   font-size: 1em;
   line-height: 2;
 }
-.content-wrap {
-  opacity: 0.9;
-}
 .sidebar {
-  opacity: 0.9;
+  opacity: 0.6;
 }
 .header-inner {
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.6);
 }
 .popup {
-  opacity: 0.9;
+  opacity: 0.6;
 }
