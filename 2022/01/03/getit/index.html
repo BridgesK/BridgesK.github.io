@@ -27,16 +27,16 @@
 <meta property="og:site_name" content="Bridgesk&#39;s Blog">
 <meta property="og:description" content="攻防世界getit查壳，无壳，为64为elf文件">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://bridgesk.github.io/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201618.png">
-<meta property="og:image" content="https://bridgesk.github.io/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201818.png">
-<meta property="og:image" content="https://bridgesk.github.io/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20202303.png">
-<meta property="og:image" content="https://bridgesk.github.io/getit/Screenshot_2022-01-02_07-25-43.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201618.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201818.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20202303.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/03/getit/Screenshot_2022-01-02_07-25-43.png">
 <meta property="article:published_time" content="2022-01-02T20:07:29.000Z">
-<meta property="article:modified_time" content="2022-02-20T08:43:23.324Z">
+<meta property="article:modified_time" content="2022-02-20T13:53:06.847Z">
 <meta property="article:author" content="Bridgesk">
 <meta property="article:tag" content="ctf">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://bridgesk.github.io/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201618.png">
+<meta name="twitter:image" content="https://bridgesk.github.io/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201618.png">
 
 
 <link rel="canonical" href="https://bridgesk.github.io/2022/01/03/getit/">
@@ -221,7 +221,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-02-20 08:43:23" itemprop="dateModified" datetime="2022-02-20T08:43:23Z">2022-02-20</time>
+      <time title="修改时间：2022-02-20 13:53:06" itemprop="dateModified" datetime="2022-02-20T13:53:06Z">2022-02-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -244,15 +244,15 @@
     
     <div class="post-body" itemprop="articleBody">
         <h2 id="攻防世界getit"><a href="#攻防世界getit" class="headerlink" title="攻防世界getit"></a>攻防世界<a target="_blank" rel="noopener" href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=0&id=5082&page=1">getit</a></h2><p>查壳，无壳，为64为elf文件</p>
-<p><img src="/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201618.png"></p>
+<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201618.png"></p>
 <span id="more"></span>
 
 <p>main函数如图所示，意思是生成一个flag，将它写入flag.txt，并最后将文件删除，所以我们只需要找到要写入flag.txt前的flag即可</p>
-<p><img src="/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201818.png"></p>
+<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201818.png"></p>
 <p>查看对应汇编代码，注意到这部分的strlen，和fseek即对应写入文件前的代码</p>
-<p><img src="/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20202303.png"></p>
+<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20202303.png"></p>
 <p>用pwndbg在0x400832处下断点，即可查看flag的值</p>
-<p><img src="/getit/Screenshot_2022-01-02_07-25-43.png"></p>
+<p><img src="/2022/01/03/getit/Screenshot_2022-01-02_07-25-43.png"></p>
 <p>其中，edi寄存器保存处理后的数据的内存地址，而该地址中的数据即为flag</p>
 
     </div>
