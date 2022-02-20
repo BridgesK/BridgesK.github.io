@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"bridgesk.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+  <meta name="description" content="re2首先用ida64打开re2文件，定位到main函数">
+<meta property="og:type" content="website">
+<meta property="og:title" content="复旦白泽暑期课程逆向入门课wp">
+<meta property="og:url" content="https://bridgesk.github.io/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/index.html">
+<meta property="og:site_name" content="Bridgesk&#39;s Blog">
+<meta property="og:description" content="re2首先用ida64打开re2文件，定位到main函数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/main.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/tiaojian1.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/tiaojian2.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/keypatcher.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/patch1.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/patch2.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/baocun.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/flag_re2.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_try.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_address.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/char.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_key.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_maze.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/maze.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/sxzy.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/panduan.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_flag.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/scanf.png">
+<meta property="og:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re1_bug.png">
+<meta property="article:published_time" content="2021-07-17T17:03:54.000Z">
+<meta property="article:modified_time" content="2022-02-20T08:43:30.826Z">
+<meta property="article:author" content="Bridgesk">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bridgesk.github.io/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/main.png">
+
+
+<link rel="canonical" href="https://bridgesk.github.io/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://bridgesk.github.io/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/","path":"2021/07/18/复旦白泽暑期课程逆向入门课wp/","title":"复旦白泽暑期课程逆向入门课wp"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>复旦白泽暑期课程逆向入门课wp | Bridgesk's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Bridgesk's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Bridgesk's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#re2"><span class="nav-number">1.</span> <span class="nav-text">re2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#re3"><span class="nav-number">2.</span> <span class="nav-text">re3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#re1%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">re1思考题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Bridgesk</p>
+  <div class="site-description" itemprop="description">记录学习与生活</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bridgesk.github.io/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bridgesk">
+      <meta itemprop="description" content="记录学习与生活">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bridgesk's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          复旦白泽暑期课程逆向入门课wp
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-07-17 17:03:54" itemprop="dateCreated datePublished" datetime="2021-07-17T17:03:54Z">2021-07-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-02-20 08:43:30" itemprop="dateModified" datetime="2022-02-20T08:43:30Z">2022-02-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">CTF刷题记录</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="re2"><a href="#re2" class="headerlink" title="re2"></a>re2</h2><p>首先用ida64打开re2文件，定位到main函数</p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/main.png"></p>
+<span id="more"></span>
+
+<p>f5反汇编得到如下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">__int64 __fastcall main(int a1, char **a2, char **a3)</span><br><span class="line">&#123;</span><br><span class="line">  unsigned int v3; // eax</span><br><span class="line">  __int64 result; // rax</span><br><span class="line">  unsigned int v5; // [rsp+4h] [rbp-1Ch]</span><br><span class="line">  unsigned int v6; // [rsp+8h] [rbp-18h]</span><br><span class="line">  unsigned int v7; // [rsp+Ch] [rbp-14h]</span><br><span class="line">  unsigned int v8; // [rsp+10h] [rbp-10h]</span><br><span class="line">  unsigned int v9; // [rsp+14h] [rbp-Ch]</span><br><span class="line">  int v10; // [rsp+18h] [rbp-8h]</span><br><span class="line"></span><br><span class="line">  puts(&quot;hi all ----------------------&quot;);</span><br><span class="line">  puts(&quot;Welcome to dice game!&quot;);</span><br><span class="line">  puts(&quot;You have to roll 5 dices and get 6, 6, 6, 6, 6 in order.&quot;);</span><br><span class="line">  puts(&quot;Press enter to roll.&quot;);</span><br><span class="line">  getchar();</span><br><span class="line">  v3 = time(0LL);</span><br><span class="line">  srand(v3);</span><br><span class="line">  v10 = time(0LL);</span><br><span class="line">  v9 = rand() % 6 + 1;</span><br><span class="line">  v8 = rand() % 6 + 1;</span><br><span class="line">  v7 = rand() % 6 + 1;</span><br><span class="line">  v6 = rand() % 6 + 1;</span><br><span class="line">  v5 = rand() % 6 + 1;</span><br><span class="line">  printf(&quot;You rolled %d, %d, %d, %d, %d.\n&quot;, v9, v8, v7, v6, v5);</span><br><span class="line">  if ( v9 != 6 )</span><br><span class="line">    goto LABEL_15;</span><br><span class="line">  if ( time(0LL) - v10 &gt; 2 )</span><br><span class="line">    goto LABEL_13;</span><br><span class="line">  if ( v8 != 6 )</span><br><span class="line">    goto LABEL_15;</span><br><span class="line">  if ( time(0LL) - v10 &gt; 2 )</span><br><span class="line">    goto LABEL_13;</span><br><span class="line">  if ( v7 != 6 )</span><br><span class="line">    goto LABEL_15;</span><br><span class="line">  if ( time(0LL) - v10 &gt; 2 )</span><br><span class="line">    goto LABEL_13;</span><br><span class="line">  if ( v6 != 6 )</span><br><span class="line">    goto LABEL_15;</span><br><span class="line">  if ( time(0LL) - v10 &gt; 2 )</span><br><span class="line">    goto LABEL_13;</span><br><span class="line">  if ( v5 == 6 )</span><br><span class="line">  &#123;</span><br><span class="line">    if ( time(0LL) - v10 &gt; 2 )</span><br><span class="line">    &#123;</span><br><span class="line">LABEL_13:</span><br><span class="line">      puts(&quot;No cheat!&quot;);</span><br><span class="line">      return 0xFFFFFFFFLL;</span><br><span class="line">    &#125;</span><br><span class="line">    puts(&quot;You rolled as I said! I&#x27;ll give you the flag.&quot;);</span><br><span class="line">    sub_4006B6();</span><br><span class="line">    result = 0LL;</span><br><span class="line">  &#125;</span><br><span class="line">  else</span><br><span class="line">  &#123;</span><br><span class="line">LABEL_15:</span><br><span class="line">    puts(&quot;You DID NOT roll as I said!&quot;);</span><br><span class="line">    puts(&quot;Bye bye~&quot;);</span><br><span class="line">    result = 0xFFFFFFFFLL;</span><br><span class="line">  &#125;</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>分析得知，这是一个摇骰子的游戏，v5到v9是1到6的时间种子随机数，要求v5到v9都是6，且time(0LL) - v10 &gt; 2两个条件都满足才能执行 sub_4006B6()函数，输出正确的flag，而v10 &#x3D; time(0LL)，所以第二个条件无法满足，想到用patch的方法修改判断条件</p>
+<p>查看对应汇编代码我们能找到如下指令</p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/tiaojian1.png"></p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/tiaojian2.png"></p>
+<p>类似的条件共有5组，第一个条件对应摇出数字6，第二个条件对应time(0LL) - v10 &gt; 2，现更改汇编，使第一类跳转不执行，第二类跳转均执行，使用keypatcher插件，将第一个条件中的6改为0，由于随机数的范围是1到6所以一定与0不等，再将jnz改为jz，则跳转一定不执行，将第二个条件中的jle改为jmp，则跳转一定执行，如下图所示</p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/keypatcher.png"></p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/patch1.png"></p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/patch2.png"></p>
+<p>将5组条件均进行相同的修改，然后保存</p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/baocun.png"></p>
+<p>将保存后的re2文件放在linux下执行，运行得到flag</p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/flag_re2.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;4b34098e229eab72739923a0b40b3be6&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="re3"><a href="#re3" class="headerlink" title="re3"></a>re3</h2><p>首先用ida64打开re3文件，定位到main函数，f5得到如下伪代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">![re3_address](%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_address.png)__int64 __fastcall main(int a1, char **a2, char **a3)</span><br><span class="line">&#123;</span><br><span class="line">  __int64 v3; // rbx</span><br><span class="line">  int v4; // eax</span><br><span class="line">  char v5; // bp</span><br><span class="line">  char v6; // al</span><br><span class="line">  const char *v7; // rdi</span><br><span class="line">  unsigned int v9; // [rsp+0h] [rbp-28h] BYREF</span><br><span class="line">  int v10[9]; // [rsp+4h] [rbp-24h] BYREF</span><br><span class="line"></span><br><span class="line">  v10[0] = 0;</span><br><span class="line">  v9 = 0;</span><br><span class="line">  puts(&quot;Give  flag:&quot;);</span><br><span class="line">  scanf(&quot;%s&quot;, &amp;s1);</span><br><span class="line">  if ( strlen(&amp;s1) != 26 || strncmp(&amp;s1, &quot;flag&#123;&quot;, 5uLL) || *(&amp;byte_6010BF + 26) != 125 )</span><br><span class="line">  &#123;</span><br><span class="line">LABEL_22:</span><br><span class="line">    puts(&quot;Wrong flag!&quot;);</span><br><span class="line">    exit(-1);</span><br><span class="line">  &#125;</span><br><span class="line">  v3 = 5LL;</span><br><span class="line">  if ( strlen(&amp;s1) - 1 &gt; 5 )</span><br><span class="line">  &#123;</span><br><span class="line">    while ( 1 )</span><br><span class="line">    &#123;</span><br><span class="line">      v4 = *(&amp;s1 + v3);</span><br><span class="line">      v5 = 0;</span><br><span class="line">      if ( v4 &gt; 67 )</span><br><span class="line">      &#123;</span><br><span class="line">        if ( (unsigned __int8)v4 == 68 )</span><br><span class="line">        &#123;</span><br><span class="line">          v6 = sub_400650(v10);</span><br><span class="line">          goto LABEL_14;</span><br><span class="line">        &#125;</span><br><span class="line">        if ( (unsigned __int8)v4 == 69 )</span><br><span class="line">        &#123;</span><br><span class="line">          v6 = sub_400660(v10);</span><br><span class="line">          goto LABEL_14;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      else</span><br><span class="line">      &#123;</span><br><span class="line">        if ( (unsigned __int8)v4 == 65 )</span><br><span class="line">        &#123;</span><br><span class="line">          v6 = sub_400670(&amp;v9);</span><br><span class="line">          goto LABEL_14;</span><br><span class="line">        &#125;</span><br><span class="line">        if ( (unsigned __int8)v4 == 66 )</span><br><span class="line">        &#123;</span><br><span class="line">          v6 = sub_400680(&amp;v9);</span><br><span class="line">LABEL_14:</span><br><span class="line">          v5 = v6;</span><br><span class="line">          goto LABEL_15;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">LABEL_15:</span><br><span class="line">      if ( !(unsigned __int8)sub_400690(asc_601060, (unsigned int)v10[0], v9) )</span><br><span class="line">        goto LABEL_22;</span><br><span class="line">      if ( ++v3 &gt;= strlen(&amp;s1) - 1 )</span><br><span class="line">      &#123;</span><br><span class="line">        if ( v5 )</span><br><span class="line">          break;</span><br><span class="line">LABEL_20:</span><br><span class="line">        v7 = &quot;Wrong flag!&quot;;</span><br><span class="line">        goto LABEL_21;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  if ( asc_601060[8 * v9 + v10[0]] != 42 )</span><br><span class="line">    goto LABEL_20;</span><br><span class="line">  v7 = &quot;Congratulations!&quot;;</span><br><span class="line">LABEL_21:</span><br><span class="line">  puts(v7);</span><br><span class="line">  return 0LL;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序大体逻辑是输出一个Give  flag:，然后将我们输入的字符串长度为26，存入s1数组，根据判断条件知s1数组的前五位为flag{先随意试一下</p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_try.png"></p>
+<p>双击byte_6010BF，发现它是s1的前一位，则*(&amp;byte_6010BF + 26)对应s1的最后一位，利用ida可将125转换为对应的字符”}”</p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_address.png"></p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/char.png"></p>
+<p>那我们的任务就是判断剩下的20个字符，它们存储在v4数组中，利用转换字符的功能，可以将68、69、65、66依次转换为D、E、A、B，继续分析，我们注意到判断flag正确与否的关键在这个地方</p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_key.png"></p>
+<p>双击asc_601060发现它是这样的字符串</p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_maze.png"></p>
+<p>典型的迷宫问题，42对应”*”，这个字符即为出口，根据asc_601060[8 * v9 + v10[0]]，判断出迷宫的行号对应v9，列号对应v10[0]，且每行有8列，先把迷宫整理一下，为便于观察用”#”代替” “</p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/maze.png"></p>
+<p>将v9、v10[0]改名为row、column，根据函数判断出</p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/sxzy.png"></p>
+<p>再根据第57行的sub_400690函数判断出空格和*可走</p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/panduan.png"></p>
+<p>则得出flag为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;EBEEBBDBBBEEEEAADAAE&#125;</span><br></pre></td></tr></table></figure>
+
+<p>验证</p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_flag.png"></p>
+<h2 id="re1思考题"><a href="#re1思考题" class="headerlink" title="re1思考题"></a>re1思考题</h2><p>由于scanf %s有可能造成溢出，且程序中没有对输入字符串的长度进行检验，所以在正确的flag后，加上任意的字符也会puts(“you are right!”)</p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/scanf.png"></p>
+<p><img src="/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re1_bug.png"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ctf/" rel="tag"># ctf</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/" rel="prev" title="2021红帽杯签到题--EBCDIC">
+                  <i class="fa fa-chevron-left"></i> 2021红帽杯签到题--EBCDIC
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/10/20/SoMuchCode/" rel="next" title="GKCTF 2021 SoMuchCode">
+                  GKCTF 2021 SoMuchCode <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bridgesk</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
