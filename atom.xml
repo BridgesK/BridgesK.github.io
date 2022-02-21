@@ -6,7 +6,7 @@
   <link href="https://bridgesk.github.io/atom.xml" rel="self"/>
   
   <link href="https://bridgesk.github.io/"/>
-  <updated>2022-02-20T13:58:03.793Z</updated>
+  <updated>2022-02-21T07:06:15.195Z</updated>
   <id>https://bridgesk.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>从kali虚拟机向windows主机传程序步骤</title>
+    <link href="https://bridgesk.github.io/2022/02/21/%E4%BB%8Ekali%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%91windows%E4%B8%BB%E6%9C%BA%E4%BC%A0%E7%A8%8B%E5%BA%8F%E6%AD%A5%E9%AA%A4/"/>
+    <id>https://bridgesk.github.io/2022/02/21/%E4%BB%8Ekali%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%91windows%E4%B8%BB%E6%9C%BA%E4%BC%A0%E7%A8%8B%E5%BA%8F%E6%AD%A5%E9%AA%A4/</id>
+    <published>2022-02-21T14:53:49.000Z</published>
+    <updated>2022-02-21T07:06:15.195Z</updated>
+    
+    <content type="html"><![CDATA[<p>检查ssh服务状态，并将其开启</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo service ssh status</span></span><br></pre></td></tr></table></figure><p>如果没有安装，则使用命令</p><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> install openssh-<span class="keyword">server</span></span><br></pre></td></tr></table></figure><span id="more"></span><p>如果已安装但服务未启动，则使用命令</p><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service ssh <span class="literal">start</span></span><br></pre></td></tr></table></figure><p>如果已经按照了Xftp程序，此时可以用Xftp连接虚拟机，直接传递文件，具体步骤可参考韩顺平老师的教程</p><p><img src="/2022/02/21/%E4%BB%8Ekali%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%91windows%E4%B8%BB%E6%9C%BA%E4%BC%A0%E7%A8%8B%E5%BA%8F%E6%AD%A5%E9%AA%A4/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-21%20144223.png"></p><p>此外，也可以打开cmd用cd命令进入到文件将要被下载到的位置</p><p>使用scp命令</p><p>示例如下</p><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp kali<span class="variable">@192</span>.<span class="number">168.46</span>.<span class="number">128</span><span class="symbol">:/home/kali/Pictures/hello</span>.png .</span><br></pre></td></tr></table></figure><p>其中192.168.46.128为kali的ip地址，可在kali中使用ip ad命令或ifconfig命令查看</p><p>&#x2F;home&#x2F;kali&#x2F;Pictures为文件在kali中的地址</p><p>hello.png为文件名</p><p> .不可少且前有空格</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;检查ssh服务状态，并将其开启&lt;/p&gt;
+&lt;figure class=&quot;highlight ebnf&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;sudo service ssh status&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;如果没有安装，则使用命令&lt;/p&gt;
+&lt;figure class=&quot;highlight pgsql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sudo apt-&lt;span class=&quot;keyword&quot;&gt;get&lt;/span&gt; install openssh-&lt;span class=&quot;keyword&quot;&gt;server&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="知识总结" scheme="https://bridgesk.github.io/categories/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/"/>
+    
+    
+    <category term="ctf" scheme="https://bridgesk.github.io/tags/ctf/"/>
+    
+  </entry>
   
   <entry>
     <title>攻防世界testre</title>
