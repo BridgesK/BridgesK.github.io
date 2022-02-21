@@ -167,6 +167,28 @@
       </tags>
   </entry>
   <entry>
+    <title>getit</title>
+    <url>/2022/01/03/getit/</url>
+    <content><![CDATA[<h2 id="攻防世界getit"><a href="#攻防世界getit" class="headerlink" title="攻防世界getit"></a>攻防世界<a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=0&id=5082&page=1">getit</a></h2><p>查壳，无壳，为64为elf文件</p>
+<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201618.png"></p>
+<span id="more"></span>
+
+<p>main函数如图所示，意思是生成一个flag，将它写入flag.txt，并最后将文件删除，所以我们只需要找到要写入flag.txt前的flag即可</p>
+<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201818.png"></p>
+<p>查看对应汇编代码，注意到这部分的strlen，和fseek即对应写入文件前的代码</p>
+<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20202303.png"></p>
+<p>用pwndbg在0x400832处下断点，即可查看flag的值</p>
+<p><img src="/2022/01/03/getit/Screenshot_2022-01-02_07-25-43.png"></p>
+<p>其中，edi寄存器保存处理后的数据的内存地址，而该地址中的数据即为flag</p>
+]]></content>
+      <categories>
+        <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>dmd-50</title>
     <url>/2022/02/15/dmd-50/</url>
     <content><![CDATA[<h2 id="dmd-50"><a href="#dmd-50" class="headerlink" title="dmd-50"></a><a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=1&id=4959&page=1">dmd-50</a></h2><p>64位elf文件</p>
@@ -186,28 +208,6 @@
 <p>得flag即为</p>
 <figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">b<span class="number">781</span>cbb<span class="number">29054</span>db<span class="number">12</span>f<span class="number">88</span>f<span class="number">08</span><span class="keyword">c</span><span class="number">6e161</span><span class="keyword">c</span><span class="number">199</span></span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>CTF刷题记录</category>
-      </categories>
-      <tags>
-        <tag>ctf</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>getit</title>
-    <url>/2022/01/03/getit/</url>
-    <content><![CDATA[<h2 id="攻防世界getit"><a href="#攻防世界getit" class="headerlink" title="攻防世界getit"></a>攻防世界<a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=0&id=5082&page=1">getit</a></h2><p>查壳，无壳，为64为elf文件</p>
-<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201618.png"></p>
-<span id="more"></span>
-
-<p>main函数如图所示，意思是生成一个flag，将它写入flag.txt，并最后将文件删除，所以我们只需要找到要写入flag.txt前的flag即可</p>
-<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201818.png"></p>
-<p>查看对应汇编代码，注意到这部分的strlen，和fseek即对应写入文件前的代码</p>
-<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20202303.png"></p>
-<p>用pwndbg在0x400832处下断点，即可查看flag的值</p>
-<p><img src="/2022/01/03/getit/Screenshot_2022-01-02_07-25-43.png"></p>
-<p>其中，edi寄存器保存处理后的数据的内存地址，而该地址中的数据即为flag</p>
 ]]></content>
       <categories>
         <category>CTF刷题记录</category>
@@ -262,31 +262,6 @@
       </tags>
   </entry>
   <entry>
-    <title>re4-unvm-me</title>
-    <url>/2022/01/11/re4-unvm-me/</url>
-    <content><![CDATA[<h2 id="攻防世界-re4-unvm-me"><a href="#攻防世界-re4-unvm-me" class="headerlink" title="攻防世界-re4-unvm-me"></a>攻防世界-<a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=1&id=5033&page=1">re4-unvm-me</a></h2><p>下载文件为pyc文件，通过uncompyle6将其反编译为py文件，其中uncompyle6支持python2.6-3.8</p>
-<p><img src="/2022/01/11/re4-unvm-me/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-11%20151300.png"></p>
-<span id="more"></span>
-
-<p>文件代码如下</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="comment"># uncompyle6 version 3.7.4</span></span><br><span class="line"><span class="comment"># Python bytecode 2.7 (62211)</span></span><br><span class="line"><span class="comment"># Decompiled from: Python 3.7.9 (tags/v3.7.9:13c94747c7, Aug 17 2020, 18:58:18) [MSC v.1900 64 bit (AMD64)]</span></span><br><span class="line"><span class="comment"># Embedded file name: unvm_me.py</span></span><br><span class="line"><span class="comment"># Compiled at: 2016-12-21 05:44:01</span></span><br><span class="line">import md5</span><br><span class="line">md5s = [</span><br><span class="line"> <span class="number">174282896860968005525213562254350376167</span>, <span class="number">137092044126081477479435678296496849608</span>, <span class="number">126300127609096051658061491018211963916</span>, <span class="number">314989972419727999226545215739316729360</span>, <span class="number">256525866025901597224592941642385934114</span>, <span class="number">115141138810151571209618282728408211053</span>, <span class="number">8705973470942652577929336993839061582</span>, <span class="number">256697681645515528548061291580728800189</span>, <span class="number">39818552652170274340851144295913091599</span>, <span class="number">65313561977812018046200997898904313350</span>, <span class="number">230909080238053318105407334248228870753</span>, <span class="number">196125799557195268866757688147870815374</span>, <span class="number">74874145132345503095307276614727915885</span>]</span><br><span class="line">print <span class="string">&#x27;Can you turn me back to python ? ...&#x27;</span></span><br><span class="line">flag = raw_input(<span class="string">&#x27;well as you wish.. what is the flag: &#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> len(flag) &gt; <span class="number">69</span>:</span><br><span class="line">    print <span class="string">&#x27;nice try&#x27;</span></span><br><span class="line">    <span class="keyword">exit</span>()</span><br><span class="line"><span class="keyword">if</span> len(flag) % <span class="number">5</span> != <span class="number">0</span>:</span><br><span class="line">    print <span class="string">&#x27;nice try&#x27;</span></span><br><span class="line">    <span class="keyword">exit</span>()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(flag), <span class="number">5</span>):</span><br><span class="line">    s = flag[i:i + <span class="number">5</span>]</span><br><span class="line">    <span class="keyword">if</span> int(<span class="string">&#x27;0x&#x27;</span> + md5.new(s).hexdigest(), <span class="number">16</span>) != md5s[(i / <span class="number">5</span>)]:</span><br><span class="line">        print <span class="string">&#x27;nice try&#x27;</span></span><br><span class="line">        <span class="keyword">exit</span>()</span><br><span class="line"></span><br><span class="line">print <span class="string">&#x27;Congratz now you have the flag&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>将md5s中的挨个解密即得flag</p>
-<p>在线解密网站</p>
-<p><a href="https://pmd5.com/">md5解密 MD5在线解密 破解md5 (pmd5.com)</a> &#x2F;&#x2F;免费</p>
-<p><a href="https://cmd5.com/">md5在线解密破解,md5解密加密 (cmd5.com)</a> &#x2F;&#x2F;部分收费</p>
-<p>最终求得flag</p>
-<figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">ALEXCTF&#123;dv<span class="number">5</span>d<span class="number">4</span>s<span class="number">2</span>vj<span class="number">8</span><span class="symbol">nk43</span>s<span class="number">8</span>d<span class="number">8</span>l<span class="number">6</span><span class="name">m1</span><span class="symbol">n5</span>l<span class="number">67</span>ds<span class="number">9</span>v<span class="number">41</span><span class="symbol">n52</span><span class="symbol">nv37</span>j<span class="number">481</span>h<span class="number">3</span>d<span class="number">28</span><span class="symbol">n4</span>b<span class="number">6</span>v<span class="number">3</span>k&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>CTF刷题记录</category>
-      </categories>
-      <tags>
-        <tag>ctf</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>从kali虚拟机向windows主机传程序步骤</title>
     <url>/2021/12/31/%E4%BB%8Ekali%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%91windows%E4%B8%BB%E6%9C%BA%E4%BC%A0%E7%A8%8B%E5%BA%8F%E6%AD%A5%E9%AA%A4%E2%80%9C/</url>
     <content><![CDATA[<p>检查ssh服务状态，并将其开启</p>
@@ -313,6 +288,31 @@
 ]]></content>
       <categories>
         <category>知识总结</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>re4-unvm-me</title>
+    <url>/2022/01/11/re4-unvm-me/</url>
+    <content><![CDATA[<h2 id="攻防世界-re4-unvm-me"><a href="#攻防世界-re4-unvm-me" class="headerlink" title="攻防世界-re4-unvm-me"></a>攻防世界-<a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=1&id=5033&page=1">re4-unvm-me</a></h2><p>下载文件为pyc文件，通过uncompyle6将其反编译为py文件，其中uncompyle6支持python2.6-3.8</p>
+<p><img src="/2022/01/11/re4-unvm-me/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-11%20151300.png"></p>
+<span id="more"></span>
+
+<p>文件代码如下</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="comment"># uncompyle6 version 3.7.4</span></span><br><span class="line"><span class="comment"># Python bytecode 2.7 (62211)</span></span><br><span class="line"><span class="comment"># Decompiled from: Python 3.7.9 (tags/v3.7.9:13c94747c7, Aug 17 2020, 18:58:18) [MSC v.1900 64 bit (AMD64)]</span></span><br><span class="line"><span class="comment"># Embedded file name: unvm_me.py</span></span><br><span class="line"><span class="comment"># Compiled at: 2016-12-21 05:44:01</span></span><br><span class="line">import md5</span><br><span class="line">md5s = [</span><br><span class="line"> <span class="number">174282896860968005525213562254350376167</span>, <span class="number">137092044126081477479435678296496849608</span>, <span class="number">126300127609096051658061491018211963916</span>, <span class="number">314989972419727999226545215739316729360</span>, <span class="number">256525866025901597224592941642385934114</span>, <span class="number">115141138810151571209618282728408211053</span>, <span class="number">8705973470942652577929336993839061582</span>, <span class="number">256697681645515528548061291580728800189</span>, <span class="number">39818552652170274340851144295913091599</span>, <span class="number">65313561977812018046200997898904313350</span>, <span class="number">230909080238053318105407334248228870753</span>, <span class="number">196125799557195268866757688147870815374</span>, <span class="number">74874145132345503095307276614727915885</span>]</span><br><span class="line">print <span class="string">&#x27;Can you turn me back to python ? ...&#x27;</span></span><br><span class="line">flag = raw_input(<span class="string">&#x27;well as you wish.. what is the flag: &#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> len(flag) &gt; <span class="number">69</span>:</span><br><span class="line">    print <span class="string">&#x27;nice try&#x27;</span></span><br><span class="line">    <span class="keyword">exit</span>()</span><br><span class="line"><span class="keyword">if</span> len(flag) % <span class="number">5</span> != <span class="number">0</span>:</span><br><span class="line">    print <span class="string">&#x27;nice try&#x27;</span></span><br><span class="line">    <span class="keyword">exit</span>()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(flag), <span class="number">5</span>):</span><br><span class="line">    s = flag[i:i + <span class="number">5</span>]</span><br><span class="line">    <span class="keyword">if</span> int(<span class="string">&#x27;0x&#x27;</span> + md5.new(s).hexdigest(), <span class="number">16</span>) != md5s[(i / <span class="number">5</span>)]:</span><br><span class="line">        print <span class="string">&#x27;nice try&#x27;</span></span><br><span class="line">        <span class="keyword">exit</span>()</span><br><span class="line"></span><br><span class="line">print <span class="string">&#x27;Congratz now you have the flag&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>将md5s中的挨个解密即得flag</p>
+<p>在线解密网站</p>
+<p><a href="https://pmd5.com/">md5解密 MD5在线解密 破解md5 (pmd5.com)</a> &#x2F;&#x2F;免费</p>
+<p><a href="https://cmd5.com/">md5在线解密破解,md5解密加密 (cmd5.com)</a> &#x2F;&#x2F;部分收费</p>
+<p>最终求得flag</p>
+<figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">ALEXCTF&#123;dv<span class="number">5</span>d<span class="number">4</span>s<span class="number">2</span>vj<span class="number">8</span><span class="symbol">nk43</span>s<span class="number">8</span>d<span class="number">8</span>l<span class="number">6</span><span class="name">m1</span><span class="symbol">n5</span>l<span class="number">67</span>ds<span class="number">9</span>v<span class="number">41</span><span class="symbol">n52</span><span class="symbol">nv37</span>j<span class="number">481</span>h<span class="number">3</span>d<span class="number">28</span><span class="symbol">n4</span>b<span class="number">6</span>v<span class="number">3</span>k&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>CTF刷题记录</category>
       </categories>
       <tags>
         <tag>ctf</tag>
