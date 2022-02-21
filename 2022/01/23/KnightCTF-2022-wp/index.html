@@ -1,37 +1,336 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>KnightCTF 2022 wp | Bridgesk&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="这个比赛是一个对新人很友好的比赛，不过也能学到一些知识 The_Flag_Vault64位elf文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KnightCTF 2022 wp">
+<meta property="og:url" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/index.html">
+<meta property="og:site_name" content="Bridgesk&#39;s Blog">
+<meta property="og:description" content="这个比赛是一个对新人很友好的比赛，不过也能学到一些知识 The_Flag_Vault64位elf文件">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20224231.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20224627.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/Screenshot_2022-01-23_09-56-20.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20230847.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20230031.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20230448.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20231519.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20231937.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20100119.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20103753.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20103753.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20110325.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20110623.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20111113.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20111519.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20101219.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20111804.png">
+<meta property="article:published_time" content="2022-01-23T10:32:27.000Z">
+<meta property="article:modified_time" content="2022-02-20T13:55:34.351Z">
+<meta property="article:author" content="Bridgesk">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20224231.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Bridgesk's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Bridgesk&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://bridgesk.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-KnightCTF-2022-wp" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/01/23/KnightCTF-2022-wp/" class="article-date">
+  <time class="dt-published" datetime="2022-01-23T10:32:27.000Z" itemprop="datePublished">2022-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CTF%E8%B5%9B%E9%A2%98%E6%80%BB%E7%BB%93/">CTF赛题总结</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      KnightCTF 2022 wp
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>这个比赛是一个对新人很友好的比赛，不过也能学到一些知识</p>
+<h2 id="The-Flag-Vault"><a href="#The-Flag-Vault" class="headerlink" title="The_Flag_Vault"></a><a target="_blank" rel="noopener" href="https://github.com/BridgesK/CTF/blob/main/knightctf_2022/The_Flag_Vault">The_Flag_Vault</a></h2><p>64位elf文件</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20224231.png"></p>
+<span id="more"></span>
+
+<p>用ida打开，发现程序将输入的字符串存入s2中，与s1字符串比较，若相同则输出正确的flag</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20224627.png"></p>
+<p>所以我们只需要运行程序并输入s1字符串即可得到flag</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/Screenshot_2022-01-23_09-56-20.png"></p>
+<h2 id="The-Encoder"><a href="#The-Encoder" class="headerlink" title="The Encoder"></a><a target="_blank" rel="noopener" href="https://github.com/BridgesK/CTF/blob/main/knightctf_2022/the_encoder.out">The Encoder</a></h2><p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20230847.png"></p>
+<p>64位无壳</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20230031.png"></p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20230448.png"></p>
+<p>用它给出的数据减去1337既得flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">encoder = [1412, 1404, 1421, 1407, 1460, 1452, 1386, 1414, 1449, 1445,</span><br><span class="line">           1388, 1432, 1388, 1415, 1436, 1385, 1405, 1388, 1451, 1432,</span><br><span class="line">           1386, 1388, 1388, 1392, 1462]</span><br><span class="line">v7 = 1337</span><br><span class="line">flag = []</span><br><span class="line">for i in range(len(encoder)):</span><br><span class="line">    flag.append(encoder[i] - v7)</span><br><span class="line">print(flag)</span><br><span class="line">for i in range(len(flag)):</span><br><span class="line">    print(chr(flag[i]),end=&#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Baby-Shark"><a href="#Baby-Shark" class="headerlink" title="Baby Shark"></a><a target="_blank" rel="noopener" href="https://github.com/BridgesK/CTF/blob/main/knightctf_2022/babyshark.jar">Baby Shark</a></h2><p>这道题我最开始一直以为是音频隐写，后来发现并不是，用<a target="_blank" rel="noopener" href="http://java-decompiler.github.io/">jd-gui</a>打开</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20231519.png"></p>
+<p>将0xflag对应部分用base64解密(<a target="_blank" rel="noopener" href="http://www.hiencode.com/base64.html">base64解密网站</a>)</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20231937.png"></p>
+<h2 id="Flag-Checker"><a href="#Flag-Checker" class="headerlink" title="Flag Checker"></a><a target="_blank" rel="noopener" href="https://github.com/BridgesK/CTF/blob/main/knightctf_2022/flag_checker">Flag Checker</a></h2><p>将文件用ida打开，找到main函数如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">int __cdecl main(int argc, const char **argv, const char **envp)</span><br><span class="line">&#123;</span><br><span class="line">  char v4[512]; // [rsp+0h] [rbp-240h] BYREF</span><br><span class="line">  char v5[51]; // [rsp+200h] [rbp-40h] BYREF</span><br><span class="line">  char v6; // [rsp+233h] [rbp-Dh]</span><br><span class="line">  int v7; // [rsp+234h] [rbp-Ch]</span><br><span class="line">  int j; // [rsp+238h] [rbp-8h]</span><br><span class="line">  int i; // [rsp+23Ch] [rbp-4h]</span><br><span class="line"></span><br><span class="line">  strcpy(v5, &quot;08&#x27;5[Z&#x27;Y:H3?X2K3V)?D2G3?H,N6?G$R(G]&quot;);</span><br><span class="line">  printf(&quot;Give me a flag : &quot;);</span><br><span class="line">  __isoc99_scanf(&quot;%s&quot;, v4);</span><br><span class="line">  for ( i = 0; v4[i]; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    if ( v4[i] &lt;= 64 || v4[i] &gt; 90 )</span><br><span class="line">    &#123;</span><br><span class="line">      if ( v4[i] &lt;= 96 || v4[i] &gt; 122 )</span><br><span class="line">        v4[i] = v4[i];</span><br><span class="line">      else</span><br><span class="line">        v4[i] = -37 - v4[i];</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">      v4[i] = -101 - v4[i];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  for ( j = 0; v4[j]; ++j )</span><br><span class="line">    v4[j] -= 32;</span><br><span class="line">  v7 = 0;</span><br><span class="line">  v6 = 0;</span><br><span class="line">  while ( v5[v7] )</span><br><span class="line">  &#123;</span><br><span class="line">    if ( v5[v7] != v4[v7] )</span><br><span class="line">    &#123;</span><br><span class="line">      v6 = 0;</span><br><span class="line">      break;</span><br><span class="line">    &#125;</span><br><span class="line">    v6 = 1;</span><br><span class="line">    ++v7;</span><br><span class="line">  &#125;</span><br><span class="line">  if ( v6 )</span><br><span class="line">    puts(&quot;You have entered the right flag.&quot;);</span><br><span class="line">  else</span><br><span class="line">    puts(&quot;Sorry ! Its wrong flag.&quot;);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由伪代码可知，程序将flag存入v4中，经过一系列加密后与v5字符串进行比较，所以只需要将已知的v5字符串解密即得flag，注意v4中每个元素的范围都在ascii码的范围内，所以要将运算结果对128取余，脚本如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">v5 = &quot;08&#x27;5[Z&#x27;Y:H3?X2K3V)?D2G3?H,N6?G$R(G]&quot;</span><br><span class="line">coded_flag = []</span><br><span class="line">for x in v5:</span><br><span class="line">    coded_flag.append(ord(x) + 32)</span><br><span class="line">for i in range(len(coded_flag)):</span><br><span class="line">    if 90 &lt; coded_flag[i] &lt;= 96 or coded_flag[i] &gt; 122 or coded_flag[i] &lt;= 64:</span><br><span class="line">        coded_flag[i] = coded_flag[i]</span><br><span class="line">    elif 96 &lt; coded_flag[i] &lt;= 122:</span><br><span class="line">        coded_flag[i] = (-37 - coded_flag[i])%128</span><br><span class="line">    else:</span><br><span class="line">        coded_flag[i] = (-101 - coded_flag[i])%128</span><br><span class="line">for z in coded_flag:</span><br><span class="line">    print(chr(z), end=&#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>运行即得flag</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20100119.png"></p>
+<h2 id="Knight-Vault"><a href="#Knight-Vault" class="headerlink" title="Knight Vault"></a><a target="_blank" rel="noopener" href="https://github.com/BridgesK/CTF/blob/main/knightctf_2022/ks_vault">Knight Vault</a></h2><p>ida反编译如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">int __cdecl main(int argc, const char **argv, const char **envp)</span><br><span class="line">&#123;</span><br><span class="line">  char v4; // [rsp+Bh] [rbp-435h]</span><br><span class="line">  int i; // [rsp+Ch] [rbp-434h]</span><br><span class="line">  int v6; // [rsp+Ch] [rbp-434h]</span><br><span class="line">  char v7[48]; // [rsp+10h] [rbp-430h] BYREF</span><br><span class="line">  char v8[1016]; // [rsp+40h] [rbp-400h] BYREF</span><br><span class="line">  unsigned __int64 v9; // [rsp+438h] [rbp-8h]</span><br><span class="line"></span><br><span class="line">  v9 = __readfsqword(0x28u);</span><br><span class="line">  strcpy(v7, &quot;*9J&lt;qiEUoEkU]EjUc;U]EEZU`EEXU^7fFoU^7Y*_D]s&quot;);</span><br><span class="line">  puts(&quot;Hello There..\nWelcome to KS Vault.&quot;);</span><br><span class="line">  printf(&quot;Please enter vault password : &quot;);</span><br><span class="line">  __isoc99_scanf(&quot;%s&quot;, v8);</span><br><span class="line">  for ( i = 0; v8[i]; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v8[i + 512] = v8[i] - 10;</span><br><span class="line">    if ( v8[i + 512] == 65 )</span><br><span class="line">      v8[i + 512] = 42;</span><br><span class="line">  &#125;</span><br><span class="line">  v6 = 0;</span><br><span class="line">  v4 = 0;</span><br><span class="line">  while ( v7[v6] )</span><br><span class="line">  &#123;</span><br><span class="line">    if ( v7[v6] != v8[v6 + 512] )</span><br><span class="line">    &#123;</span><br><span class="line">      v4 = 0;</span><br><span class="line">      break;</span><br><span class="line">    &#125;</span><br><span class="line">    v4 = 1;</span><br><span class="line">    ++v6;</span><br><span class="line">  &#125;</span><br><span class="line">  if ( v4 )</span><br><span class="line">    win();</span><br><span class="line">  else</span><br><span class="line">    puts(&quot;Wrong password !&quot;);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解密脚本如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">encoded_flag = &#x27;*9J&lt;qiEUoEkU]EjUc;U]EEZU`EEXU^7fFoU^7Y*_D]s&#x27;</span><br><span class="line">flag = []</span><br><span class="line">for i in encoded_flag:</span><br><span class="line">    if ord(i) == 42:</span><br><span class="line">        flag.append(75)</span><br><span class="line">    else:flag.append(ord(i) + 10)</span><br><span class="line">for i in range(len(flag)):</span><br><span class="line">    print(chr(flag[i]), end=&#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>运行得flag</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20103753.png"></p>
+<h2 id="Knight-Switch-Bank"><a href="#Knight-Switch-Bank" class="headerlink" title="Knight Switch Bank"></a><a target="_blank" rel="noopener" href="https://github.com/BridgesK/CTF/blob/main/knightctf_2022/ks_switch_bank.out">Knight Switch Bank</a></h2><p>这道题也是给出了加密后的字符串以及加密过程，求出加密前的字符串即得flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">int __cdecl main(int argc, const char **argv, const char **envp)</span><br><span class="line">&#123;</span><br><span class="line">  char v4[512]; // [rsp+0h] [rbp-430h]</span><br><span class="line">  char v5[512]; // [rsp+200h] [rbp-230h] BYREF</span><br><span class="line">  char v6[32]; // [rsp+400h] [rbp-30h] BYREF</span><br><span class="line">  int i; // [rsp+420h] [rbp-10h]</span><br><span class="line">  char v8; // [rsp+427h] [rbp-9h]</span><br><span class="line">  int v9; // [rsp+428h] [rbp-8h]</span><br><span class="line">  int v10; // [rsp+42Ch] [rbp-4h]</span><br><span class="line"></span><br><span class="line">  strcpy(v6, &quot;ZRIU]HdANdJAGDIAxIAvDDsAyDDq_&quot;);</span><br><span class="line">  v10 = 0;</span><br><span class="line">  v9 = 0;</span><br><span class="line">  puts(&quot;-------------------------------------&quot;);</span><br><span class="line">  puts(&quot;\tKnight Switch Bank&quot;);</span><br><span class="line">  puts(&quot;--------------------------------------&quot;);</span><br><span class="line">  puts(&quot;Welcome to Knight Switch Bank....&quot;);</span><br><span class="line">  printf(&quot;Please enter your password : &quot;);</span><br><span class="line">  __isoc99_scanf(&quot;%s&quot;, v5);</span><br><span class="line">  while ( v5[v10] )</span><br><span class="line">  &#123;</span><br><span class="line">    if ( v5[v10] &lt;= 64 || v5[v10] &gt; 77 )</span><br><span class="line">    &#123;</span><br><span class="line">      if ( v5[v10] &lt;= 96 || v5[v10] &gt; 109 )</span><br><span class="line">      &#123;</span><br><span class="line">        if ( v5[v10] &lt;= 77 || v5[v10] &gt; 90 )</span><br><span class="line">        &#123;</span><br><span class="line">          if ( v5[v10] &lt;= 109 || v5[v10] &gt; 122 )</span><br><span class="line">            v4[v10] = v5[v10] - 32;</span><br><span class="line">          else</span><br><span class="line">            v4[v10] = v5[v10] - 13;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">          v4[v10] = v5[v10] - 13;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      else</span><br><span class="line">      &#123;</span><br><span class="line">        v4[v10] = v5[v10] + 13;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">      v4[v10] = v5[v10] + 13;</span><br><span class="line">    &#125;</span><br><span class="line">    ++v10;</span><br><span class="line">  &#125;</span><br><span class="line">  while ( v4[v9] )</span><br><span class="line">    v4[v9++] += 2;</span><br><span class="line">  v8 = 0;</span><br><span class="line">  for ( i = 0; v6[i]; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    if ( v6[i] != v4[i] )</span><br><span class="line">    &#123;</span><br><span class="line">      v8 = 0;</span><br><span class="line">      break;</span><br><span class="line">    &#125;</span><br><span class="line">    v8 = 1;</span><br><span class="line">  &#125;</span><br><span class="line">  if ( v8 )</span><br><span class="line">    winner();</span><br><span class="line">  else</span><br><span class="line">    puts(&quot;Oh My God ! You entered a wrong password.&quot;);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，程序对不同范围的输入字符串进行了不同的加密，所以可以爆破求字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">encoded_flag = &#x27;ZRIU]HdANdJAGDIAxIAvDDsAyDDq_&#x27;</span><br><span class="line">flag = []</span><br><span class="line">for j in range(len(encoded_flag)):</span><br><span class="line">    for i in range(0, 128):</span><br><span class="line">        if i &lt;= 64 or i &gt; 77:</span><br><span class="line">            if i &lt;= 96 or i &gt; 109:</span><br><span class="line">                if i &lt;= 77 or i &gt; 90:</span><br><span class="line">                    if i &lt;= 109 or i &gt; 122:</span><br><span class="line">                        k = i - 32</span><br><span class="line">                    else:</span><br><span class="line">                        k = i - 13</span><br><span class="line">                else:</span><br><span class="line">                    k = i - 13</span><br><span class="line">            else:</span><br><span class="line">                k = i + 13</span><br><span class="line">        else:</span><br><span class="line">            k = i + 13</span><br><span class="line">        if k == ord(encoded_flag[j]) - 2:</span><br><span class="line">            flag.append(i)</span><br><span class="line">for i in range(len(flag)):</span><br><span class="line">    print(chr(flag[i]), end=&#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>运行既得flag</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20103753.png"></p>
+<h2 id="Droid-Flag"><a href="#Droid-Flag" class="headerlink" title="Droid Flag"></a><a target="_blank" rel="noopener" href="https://github.com/BridgesK/CTF/blob/main/knightctf_2022/DroidFlag.apk">Droid Flag</a></h2><p>这道题比赛时我没有做出来，原因是不会寻找字符串</p>
+<p>方法一，用jeb直接打开DroidFlag.apk，在MainActivity中可以看到，flag即为getS1()，getS3()，getS2()，getS4()几个函数的返回值拼接起来</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20110325.png"></p>
+<p>双击getS1()，可以跳转到定义这几个函数的位置</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20110623.png"></p>
+<p>可以看到，jeb已经将这几个字符串的值注释出来了，易得flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s1=&quot;3LpM1s&quot;</span><br><span class="line">s3=&quot;D10RdNa&quot;</span><br><span class="line">s2=&quot;3Sr3V3r&quot;</span><br><span class="line"></span><br><span class="line">a = s1 + &quot;_&quot; +s2+ &quot;_&quot; +s3</span><br><span class="line">b = a[::-1]</span><br><span class="line">print(&#x27;KCTF&#123;&#x27;+b+&#x27;&#125;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20111113.png"></p>
+<p>另一种方法参考了这篇wp</p>
+<p>[Droid Flag <a target="_blank" rel="noopener" href="https://gist.github.com/Rajchowdhury420/b647ffcb541bcd4732760114b6aca0eb">Rev] Knight CTF 2022 (github.com)</a></p>
+<p>首先将apktools复制到DroidFlag.apk所在的文件夹，执行如下命令</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20111519.png"></p>
+<p>在values文件夹中找到strings.xml</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20101219.png"></p>
+<p>同样可以查看字符串</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20111804.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bridgesk.github.io/2022/01/23/KnightCTF-2022-wp/" data-id="ckzw4rwt00007u8tk866kgtgn" data-title="KnightCTF 2022 wp" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/" rel="tag">ctf</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CBabyre/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          攻防世界Babyre
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/01/21/Guess-the-Number/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Guess-the-Number</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
-
-{% block page_class %}page-post-detail{% endblock %}
-
-
-{% block content %}
-
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
-
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CTF刷题记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF%E8%B5%9B%E9%A2%98%E6%80%BB%E7%BB%93/">CTF赛题总结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/">知识总结</a></li></ul>
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf/" rel="tag">ctf</a></li></ul>
+    </div>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ctf/" style="font-size: 10px;">ctf</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/19/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Ctestre/">攻防世界testre</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/15/dmd-50/">dmd-50</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CBabyre/">攻防世界Babyre</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/23/KnightCTF-2022-wp/">KnightCTF 2022 wp</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/21/Guess-the-Number/">Guess-the-Number</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Bridgesk<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
