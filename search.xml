@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Guess-the-Number</title>
+    <url>/2022/01/21/Guess-the-Number/</url>
+    <content><![CDATA[<h2 id="Guess-the-Number"><a href="#Guess-the-Number" class="headerlink" title="Guess-the-Number"></a><a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=1&id=4908&page=1">Guess-the-Number</a></h2><p>得到jar文件，用<a href="http://java-decompiler.github.io/">jd-gui</a>反编译得到如下源码</p>
+<span id="more"></span>
+
+<p><img src="/2022/01/21/Guess-the-Number/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-21%20122902.png"></p>
+<p>点击File -&gt; Save，将其打包为.java文件</p>
+<p><img src="/2022/01/21/Guess-the-Number/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-21%20123042.png"></p>
+<p>在vscode中搭建java环境，打开guess.java，修改代码如下</p>
+<p><img src="/2022/01/21/Guess-the-Number/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-21%20123539.png"></p>
+<p>运行既得flag</p>
+<p><img src="/2022/01/21/Guess-the-Number/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-21%20123802.png"></p>
+]]></content>
+      <categories>
+        <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2021红帽杯签到题--EBCDIC</title>
+    <url>/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/</url>
+    <content><![CDATA[<h2 id="2021红帽杯签到题–EBCDIC"><a href="#2021红帽杯签到题–EBCDIC" class="headerlink" title="2021红帽杯签到题–EBCDIC"></a>2021红帽杯签到题–EBCDIC</h2><p>打开文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">啌亣捆咇凁攨mｐm檯剤仯蝠蝰?</span><br></pre></td></tr></table></figure>
+
+<p>用kali转码，将ebcdic编码转位ascii编码</p>
+<p><img src="/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/hello.png"></p>
+<span id="more"></span>
+
+<p><img src="/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/good.png"></p>
+<p>打开FILE.txt即得flag</p>
+]]></content>
+      <categories>
+        <category>CTF赛题总结</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KnightCTF 2022 wp</title>
+    <url>/2022/01/23/KnightCTF-2022-wp/</url>
+    <content><![CDATA[<p>这个比赛是一个对新人很友好的比赛，不过也能学到一些知识</p>
+<h2 id="The-Flag-Vault"><a href="#The-Flag-Vault" class="headerlink" title="The_Flag_Vault"></a><a href="https://github.com/BridgesK/CTF/blob/main/knightctf_2022/The_Flag_Vault">The_Flag_Vault</a></h2><p>64位elf文件</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20224231.png"></p>
+<span id="more"></span>
+
+<p>用ida打开，发现程序将输入的字符串存入s2中，与s1字符串比较，若相同则输出正确的flag</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20224627.png"></p>
+<p>所以我们只需要运行程序并输入s1字符串即可得到flag</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/Screenshot_2022-01-23_09-56-20.png"></p>
+<h2 id="The-Encoder"><a href="#The-Encoder" class="headerlink" title="The Encoder"></a><a href="https://github.com/BridgesK/CTF/blob/main/knightctf_2022/the_encoder.out">The Encoder</a></h2><p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20230847.png"></p>
+<p>64位无壳</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20230031.png"></p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20230448.png"></p>
+<p>用它给出的数据减去1337既得flag</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">encoder = [1412, 1404, 1421, 1407, 1460, 1452, 1386, 1414, 1449, 1445,</span><br><span class="line">           1388, 1432, 1388, 1415, 1436, 1385, 1405, 1388, 1451, 1432,</span><br><span class="line">           1386, 1388, 1388, 1392, 1462]</span><br><span class="line">v7 = 1337</span><br><span class="line">flag = []</span><br><span class="line">for i in range(len(encoder)):</span><br><span class="line">    flag.append(encoder[i] - v7)</span><br><span class="line">print(flag)</span><br><span class="line">for i in range(len(flag)):</span><br><span class="line">    print(chr(flag[i]),end=&#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Baby-Shark"><a href="#Baby-Shark" class="headerlink" title="Baby Shark"></a><a href="https://github.com/BridgesK/CTF/blob/main/knightctf_2022/babyshark.jar">Baby Shark</a></h2><p>这道题我最开始一直以为是音频隐写，后来发现并不是，用<a href="http://java-decompiler.github.io/">jd-gui</a>打开</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20231519.png"></p>
+<p>将0xflag对应部分用base64解密(<a href="http://www.hiencode.com/base64.html">base64解密网站</a>)</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20231937.png"></p>
+<h2 id="Flag-Checker"><a href="#Flag-Checker" class="headerlink" title="Flag Checker"></a><a href="https://github.com/BridgesK/CTF/blob/main/knightctf_2022/flag_checker">Flag Checker</a></h2><p>将文件用ida打开，找到main函数如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int __cdecl main(int argc, const char **argv, const char **envp)</span><br><span class="line">&#123;</span><br><span class="line">  char v4[512]; // [rsp+0h] [rbp-240h] BYREF</span><br><span class="line">  char v5[51]; // [rsp+200h] [rbp-40h] BYREF</span><br><span class="line">  char v6; // [rsp+233h] [rbp-Dh]</span><br><span class="line">  int v7; // [rsp+234h] [rbp-Ch]</span><br><span class="line">  int j; // [rsp+238h] [rbp-8h]</span><br><span class="line">  int i; // [rsp+23Ch] [rbp-4h]</span><br><span class="line"></span><br><span class="line">  strcpy(v5, &quot;08&#x27;5[Z&#x27;Y:H3?X2K3V)?D2G3?H,N6?G$R(G]&quot;);</span><br><span class="line">  printf(&quot;Give me a flag : &quot;);</span><br><span class="line">  __isoc99_scanf(&quot;%s&quot;, v4);</span><br><span class="line">  for ( i = 0; v4[i]; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    if ( v4[i] &lt;= 64 || v4[i] &gt; 90 )</span><br><span class="line">    &#123;</span><br><span class="line">      if ( v4[i] &lt;= 96 || v4[i] &gt; 122 )</span><br><span class="line">        v4[i] = v4[i];</span><br><span class="line">      else</span><br><span class="line">        v4[i] = -37 - v4[i];</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">      v4[i] = -101 - v4[i];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  for ( j = 0; v4[j]; ++j )</span><br><span class="line">    v4[j] -= 32;</span><br><span class="line">  v7 = 0;</span><br><span class="line">  v6 = 0;</span><br><span class="line">  while ( v5[v7] )</span><br><span class="line">  &#123;</span><br><span class="line">    if ( v5[v7] != v4[v7] )</span><br><span class="line">    &#123;</span><br><span class="line">      v6 = 0;</span><br><span class="line">      break;</span><br><span class="line">    &#125;</span><br><span class="line">    v6 = 1;</span><br><span class="line">    ++v7;</span><br><span class="line">  &#125;</span><br><span class="line">  if ( v6 )</span><br><span class="line">    puts(&quot;You have entered the right flag.&quot;);</span><br><span class="line">  else</span><br><span class="line">    puts(&quot;Sorry ! Its wrong flag.&quot;);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由伪代码可知，程序将flag存入v4中，经过一系列加密后与v5字符串进行比较，所以只需要将已知的v5字符串解密即得flag，注意v4中每个元素的范围都在ascii码的范围内，所以要将运算结果对128取余，脚本如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">v5 = &quot;08&#x27;5[Z&#x27;Y:H3?X2K3V)?D2G3?H,N6?G$R(G]&quot;</span><br><span class="line">coded_flag = []</span><br><span class="line">for x in v5:</span><br><span class="line">    coded_flag.append(ord(x) + 32)</span><br><span class="line">for i in range(len(coded_flag)):</span><br><span class="line">    if 90 &lt; coded_flag[i] &lt;= 96 or coded_flag[i] &gt; 122 or coded_flag[i] &lt;= 64:</span><br><span class="line">        coded_flag[i] = coded_flag[i]</span><br><span class="line">    elif 96 &lt; coded_flag[i] &lt;= 122:</span><br><span class="line">        coded_flag[i] = (-37 - coded_flag[i])%128</span><br><span class="line">    else:</span><br><span class="line">        coded_flag[i] = (-101 - coded_flag[i])%128</span><br><span class="line">for z in coded_flag:</span><br><span class="line">    print(chr(z), end=&#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>运行即得flag</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20100119.png"></p>
+<h2 id="Knight-Vault"><a href="#Knight-Vault" class="headerlink" title="Knight Vault"></a><a href="https://github.com/BridgesK/CTF/blob/main/knightctf_2022/ks_vault">Knight Vault</a></h2><p>ida反编译如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int __cdecl main(int argc, const char **argv, const char **envp)</span><br><span class="line">&#123;</span><br><span class="line">  char v4; // [rsp+Bh] [rbp-435h]</span><br><span class="line">  int i; // [rsp+Ch] [rbp-434h]</span><br><span class="line">  int v6; // [rsp+Ch] [rbp-434h]</span><br><span class="line">  char v7[48]; // [rsp+10h] [rbp-430h] BYREF</span><br><span class="line">  char v8[1016]; // [rsp+40h] [rbp-400h] BYREF</span><br><span class="line">  unsigned __int64 v9; // [rsp+438h] [rbp-8h]</span><br><span class="line"></span><br><span class="line">  v9 = __readfsqword(0x28u);</span><br><span class="line">  strcpy(v7, &quot;*9J&lt;qiEUoEkU]EjUc;U]EEZU`EEXU^7fFoU^7Y*_D]s&quot;);</span><br><span class="line">  puts(&quot;Hello There..\nWelcome to KS Vault.&quot;);</span><br><span class="line">  printf(&quot;Please enter vault password : &quot;);</span><br><span class="line">  __isoc99_scanf(&quot;%s&quot;, v8);</span><br><span class="line">  for ( i = 0; v8[i]; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v8[i + 512] = v8[i] - 10;</span><br><span class="line">    if ( v8[i + 512] == 65 )</span><br><span class="line">      v8[i + 512] = 42;</span><br><span class="line">  &#125;</span><br><span class="line">  v6 = 0;</span><br><span class="line">  v4 = 0;</span><br><span class="line">  while ( v7[v6] )</span><br><span class="line">  &#123;</span><br><span class="line">    if ( v7[v6] != v8[v6 + 512] )</span><br><span class="line">    &#123;</span><br><span class="line">      v4 = 0;</span><br><span class="line">      break;</span><br><span class="line">    &#125;</span><br><span class="line">    v4 = 1;</span><br><span class="line">    ++v6;</span><br><span class="line">  &#125;</span><br><span class="line">  if ( v4 )</span><br><span class="line">    win();</span><br><span class="line">  else</span><br><span class="line">    puts(&quot;Wrong password !&quot;);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解密脚本如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">encoded_flag = &#x27;*9J&lt;qiEUoEkU]EjUc;U]EEZU`EEXU^7fFoU^7Y*_D]s&#x27;</span><br><span class="line">flag = []</span><br><span class="line">for i in encoded_flag:</span><br><span class="line">    if ord(i) == 42:</span><br><span class="line">        flag.append(75)</span><br><span class="line">    else:flag.append(ord(i) + 10)</span><br><span class="line">for i in range(len(flag)):</span><br><span class="line">    print(chr(flag[i]), end=&#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>运行得flag</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20103753.png"></p>
+<h2 id="Knight-Switch-Bank"><a href="#Knight-Switch-Bank" class="headerlink" title="Knight Switch Bank"></a><a href="https://github.com/BridgesK/CTF/blob/main/knightctf_2022/ks_switch_bank.out">Knight Switch Bank</a></h2><p>这道题也是给出了加密后的字符串以及加密过程，求出加密前的字符串即得flag</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int __cdecl main(int argc, const char **argv, const char **envp)</span><br><span class="line">&#123;</span><br><span class="line">  char v4[512]; // [rsp+0h] [rbp-430h]</span><br><span class="line">  char v5[512]; // [rsp+200h] [rbp-230h] BYREF</span><br><span class="line">  char v6[32]; // [rsp+400h] [rbp-30h] BYREF</span><br><span class="line">  int i; // [rsp+420h] [rbp-10h]</span><br><span class="line">  char v8; // [rsp+427h] [rbp-9h]</span><br><span class="line">  int v9; // [rsp+428h] [rbp-8h]</span><br><span class="line">  int v10; // [rsp+42Ch] [rbp-4h]</span><br><span class="line"></span><br><span class="line">  strcpy(v6, &quot;ZRIU]HdANdJAGDIAxIAvDDsAyDDq_&quot;);</span><br><span class="line">  v10 = 0;</span><br><span class="line">  v9 = 0;</span><br><span class="line">  puts(&quot;-------------------------------------&quot;);</span><br><span class="line">  puts(&quot;\tKnight Switch Bank&quot;);</span><br><span class="line">  puts(&quot;--------------------------------------&quot;);</span><br><span class="line">  puts(&quot;Welcome to Knight Switch Bank....&quot;);</span><br><span class="line">  printf(&quot;Please enter your password : &quot;);</span><br><span class="line">  __isoc99_scanf(&quot;%s&quot;, v5);</span><br><span class="line">  while ( v5[v10] )</span><br><span class="line">  &#123;</span><br><span class="line">    if ( v5[v10] &lt;= 64 || v5[v10] &gt; 77 )</span><br><span class="line">    &#123;</span><br><span class="line">      if ( v5[v10] &lt;= 96 || v5[v10] &gt; 109 )</span><br><span class="line">      &#123;</span><br><span class="line">        if ( v5[v10] &lt;= 77 || v5[v10] &gt; 90 )</span><br><span class="line">        &#123;</span><br><span class="line">          if ( v5[v10] &lt;= 109 || v5[v10] &gt; 122 )</span><br><span class="line">            v4[v10] = v5[v10] - 32;</span><br><span class="line">          else</span><br><span class="line">            v4[v10] = v5[v10] - 13;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">          v4[v10] = v5[v10] - 13;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      else</span><br><span class="line">      &#123;</span><br><span class="line">        v4[v10] = v5[v10] + 13;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">      v4[v10] = v5[v10] + 13;</span><br><span class="line">    &#125;</span><br><span class="line">    ++v10;</span><br><span class="line">  &#125;</span><br><span class="line">  while ( v4[v9] )</span><br><span class="line">    v4[v9++] += 2;</span><br><span class="line">  v8 = 0;</span><br><span class="line">  for ( i = 0; v6[i]; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    if ( v6[i] != v4[i] )</span><br><span class="line">    &#123;</span><br><span class="line">      v8 = 0;</span><br><span class="line">      break;</span><br><span class="line">    &#125;</span><br><span class="line">    v8 = 1;</span><br><span class="line">  &#125;</span><br><span class="line">  if ( v8 )</span><br><span class="line">    winner();</span><br><span class="line">  else</span><br><span class="line">    puts(&quot;Oh My God ! You entered a wrong password.&quot;);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，程序对不同范围的输入字符串进行了不同的加密，所以可以爆破求字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">encoded_flag = &#x27;ZRIU]HdANdJAGDIAxIAvDDsAyDDq_&#x27;</span><br><span class="line">flag = []</span><br><span class="line">for j in range(len(encoded_flag)):</span><br><span class="line">    for i in range(0, 128):</span><br><span class="line">        if i &lt;= 64 or i &gt; 77:</span><br><span class="line">            if i &lt;= 96 or i &gt; 109:</span><br><span class="line">                if i &lt;= 77 or i &gt; 90:</span><br><span class="line">                    if i &lt;= 109 or i &gt; 122:</span><br><span class="line">                        k = i - 32</span><br><span class="line">                    else:</span><br><span class="line">                        k = i - 13</span><br><span class="line">                else:</span><br><span class="line">                    k = i - 13</span><br><span class="line">            else:</span><br><span class="line">                k = i + 13</span><br><span class="line">        else:</span><br><span class="line">            k = i + 13</span><br><span class="line">        if k == ord(encoded_flag[j]) - 2:</span><br><span class="line">            flag.append(i)</span><br><span class="line">for i in range(len(flag)):</span><br><span class="line">    print(chr(flag[i]), end=&#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>运行既得flag</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20103753.png"></p>
+<h2 id="Droid-Flag"><a href="#Droid-Flag" class="headerlink" title="Droid Flag"></a><a href="https://github.com/BridgesK/CTF/blob/main/knightctf_2022/DroidFlag.apk">Droid Flag</a></h2><p>这道题比赛时我没有做出来，原因是不会寻找字符串</p>
+<p>方法一，用jeb直接打开DroidFlag.apk，在MainActivity中可以看到，flag即为getS1()，getS3()，getS2()，getS4()几个函数的返回值拼接起来</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20110325.png"></p>
+<p>双击getS1()，可以跳转到定义这几个函数的位置</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20110623.png"></p>
+<p>可以看到，jeb已经将这几个字符串的值注释出来了，易得flag</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">s1=&quot;3LpM1s&quot;</span><br><span class="line">s3=&quot;D10RdNa&quot;</span><br><span class="line">s2=&quot;3Sr3V3r&quot;</span><br><span class="line"></span><br><span class="line">a = s1 + &quot;_&quot; +s2+ &quot;_&quot; +s3</span><br><span class="line">b = a[::-1]</span><br><span class="line">print(&#x27;KCTF&#123;&#x27;+b+&#x27;&#125;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20111113.png"></p>
+<p>另一种方法参考了这篇wp</p>
+<p>[Droid Flag <a href="https://gist.github.com/Rajchowdhury420/b647ffcb541bcd4732760114b6aca0eb">Rev] Knight CTF 2022 (github.com)</a></p>
+<p>首先将apktools复制到DroidFlag.apk所在的文件夹，执行如下命令</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20111519.png"></p>
+<p>在values文件夹中找到strings.xml</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-23%20101219.png"></p>
+<p>同样可以查看字符串</p>
+<p><img src="/2022/01/23/KnightCTF-2022-wp/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-24%20111804.png"></p>
+]]></content>
+      <categories>
+        <category>CTF赛题总结</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GKCTF 2021 SoMuchCode</title>
+    <url>/2021/10/20/SoMuchCode/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>csaw2013reversing2</title>
+    <url>/2022/01/01/csaw2013reversing2/</url>
+    <content><![CDATA[<h2 id="攻防世界csaw2013reversing2"><a href="#攻防世界csaw2013reversing2" class="headerlink" title="攻防世界csaw2013reversing2"></a>攻防世界<a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=0&id=5081&page=1">csaw2013reversing2</a></h2><p>查壳，无壳</p>
+<p><img src="/2022/01/01/csaw2013reversing2/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-01%20144716.png"></p>
+<span id="more"></span>
+
+<p>运行一下，发现是乱码</p>
+<p><img src="/2022/01/01/csaw2013reversing2/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-01%20150323.png"></p>
+<p>拖入ida中，找到main函数，f5查看伪代码</p>
+<p><img src="/2022/01/01/csaw2013reversing2/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-01%20144918.png"></p>
+<p>关键函数为IsDebuggerPresent，这个函数的作用是检测当前程序是否正在被调试，从图中可以看到，如果不是被调试，则会执行MessageBoxA函数，显示乱码。</p>
+<p>关于IsDebuggerPresent函数与fs寄存器的介绍参考如下链接</p>
+<p><a href="https://blog.csdn.net/ls1160/article/details/38105873#">(23条消息) 反调试技术- IsDebuggerPresent，原理 与 反反调试_desword– 技术，杂文。-CSDN博客_isdebuggerpresent</a></p>
+<p><a href="https://www.cnblogs.com/dpblue/p/4850661.html">fs寄存器 - 深蓝无忌 - 博客园 (cnblogs.com)</a></p>
+<p>查看汇编代码，发现int3中断</p>
+<p><img src="/2022/01/01/csaw2013reversing2/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-01%20150805.png"></p>
+<p>int3中断介绍</p>
+<p><a href="https://blog.csdn.net/niuyisheng/article/details/9159895">(23条消息) int 3 软中断指令_niuyisheng的专栏-CSDN博客_int3中断</a></p>
+<p>通过x64dbg动态调试，达到中断位置，即可求解</p>
+<p>首先用x64dbg打开程序，设置在入口断点处停止</p>
+<p><img src="/2022/01/01/csaw2013reversing2/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-01%20151332.png"></p>
+<p>可以看到如图情况</p>
+<p><img src="/2022/01/01/csaw2013reversing2/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-01%20151225.png"></p>
+<p>F9运行，即可运行至int3断点的位置</p>
+<p><img src="/2022/01/01/csaw2013reversing2/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-01%20151601.png"></p>
+<p>我们注意到mov指令就是将flag的地址存入edx中，所以我们要执行这条语句，但由于int3，无法直接F8运行，可以先将int3用nop代替，在int3处按下空格键即可进行patch</p>
+<p><img src="/2022/01/01/csaw2013reversing2/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-01%20151858.png"></p>
+<p>F8运行后，注意到寄存器窗口EDX的值发生变化</p>
+<p><img src="/2022/01/01/csaw2013reversing2/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-01%20152047.png"></p>
+<p>右键选择在内存中转到</p>
+<p><img src="/2022/01/01/csaw2013reversing2/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-01%20152228.png"></p>
+<p>然后在F8运行call函数即可得到flag</p>
+<p><img src="/2022/01/01/csaw2013reversing2/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-01%20152428.png"></p>
+]]></content>
+      <categories>
+        <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>dmd-50</title>
+    <url>/2022/02/15/dmd-50/</url>
+    <content><![CDATA[<h2 id="dmd-50"><a href="#dmd-50" class="headerlink" title="dmd-50"></a><a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=1&id=4959&page=1">dmd-50</a></h2><p>64位elf文件</p>
+<p><img src="/2022/02/15/dmd-50/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-15%20153330.png"></p>
+<span id="more"></span>
+
+<p>拖入ida中，反编译得main函数如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int __cdecl main(int argc, const char **argv, const char **envp)</span><br><span class="line">&#123;</span><br><span class="line">  __int64 v3; // rax</span><br><span class="line">  __int64 v4; // rax</span><br><span class="line">  __int64 v5; // rax</span><br><span class="line">  __int64 v6; // rax</span><br><span class="line">  __int64 v7; // rax</span><br><span class="line">  __int64 v8; // rax</span><br><span class="line">  __int64 v9; // rax</span><br><span class="line">  __int64 v10; // rax</span><br><span class="line">  __int64 v11; // rax</span><br><span class="line">  __int64 v12; // rax</span><br><span class="line">  __int64 v13; // rax</span><br><span class="line">  __int64 v14; // rax</span><br><span class="line">  __int64 v15; // rax</span><br><span class="line">  __int64 v16; // rax</span><br><span class="line">  __int64 v17; // rax</span><br><span class="line">  __int64 v18; // rax</span><br><span class="line">  __int64 v19; // rax</span><br><span class="line">  __int64 v20; // rax</span><br><span class="line">  __int64 v21; // rax</span><br><span class="line">  __int64 v23; // rax</span><br><span class="line">  __int64 v24; // rax</span><br><span class="line">  __int64 v25; // rax</span><br><span class="line">  __int64 v26; // rax</span><br><span class="line">  __int64 v27; // rax</span><br><span class="line">  __int64 v28; // rax</span><br><span class="line">  __int64 v29; // rax</span><br><span class="line">  __int64 v30; // rax</span><br><span class="line">  __int64 v31; // rax</span><br><span class="line">  __int64 v32; // rax</span><br><span class="line">  __int64 v33; // rax</span><br><span class="line">  __int64 v34; // rax</span><br><span class="line">  __int64 v35; // rax</span><br><span class="line">  __int64 v36; // rax</span><br><span class="line">  __int64 v37; // rax</span><br><span class="line">  char v38; // [rsp+Fh] [rbp-71h] BYREF</span><br><span class="line">  char v39[16]; // [rsp+10h] [rbp-70h] BYREF</span><br><span class="line">  char v40[8]; // [rsp+20h] [rbp-60h] BYREF</span><br><span class="line">  __int64 v41; // [rsp+28h] [rbp-58h]</span><br><span class="line">  char v42[56]; // [rsp+30h] [rbp-50h] BYREF</span><br><span class="line">  unsigned __int64 v43; // [rsp+68h] [rbp-18h]</span><br><span class="line"></span><br><span class="line">  v43 = __readfsqword(0x28u);</span><br><span class="line">  std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(&amp;std::cout, &quot;Enter the valid key!\n&quot;, envp);</span><br><span class="line">  std::operator&gt;&gt;&lt;char,std::char_traits&lt;char&gt;&gt;(&amp;edata, v42);</span><br><span class="line">  std::allocator&lt;char&gt;::allocator(&amp;v38);</span><br><span class="line">  std::string::string(v39, v42, &amp;v38);</span><br><span class="line">  md5((MD5 *)v40, (const std::string *)v39);</span><br><span class="line">  v41 = std::string::c_str((std::string *)v40);</span><br><span class="line">  std::string::~string((std::string *)v40);</span><br><span class="line">  std::string::~string((std::string *)v39);</span><br><span class="line">  std::allocator&lt;char&gt;::~allocator((__int64)&amp;v38);</span><br><span class="line">  if ( *(_WORD *)v41 == 14391</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 2) == &#x27;0&#x27;</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 3) == &#x27;4&#x27;</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 4) == &#x27;3&#x27;</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 5) == 56</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 6) == 100</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 7) == 53</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 8) == 98</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 9) == 54</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 10) == 101</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 11) == 50</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 12) == 57</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 13) == 100</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 14) == 98</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 15) == 48</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 16) == 56</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 17) == 57</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 18) == 56</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 19) == 98</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 20) == 99</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 21) == 52</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 22) == 102</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 23) == 48</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 24) == 50</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 25) == 50</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 26) == 53</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 27) == 57</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 28) == 51</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 29) == 53</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 30) == &#x27;c&#x27;</span><br><span class="line">    &amp;&amp; *(_BYTE *)(v41 + 31) == &#x27;0&#x27; )</span><br><span class="line">  &#123;</span><br><span class="line">    v3 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(&amp;std::cout, &#x27;T&#x27;);</span><br><span class="line">    v4 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v3, &#x27;h&#x27;);</span><br><span class="line">    v5 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v4, &#x27;e&#x27;);</span><br><span class="line">    v6 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v5, &#x27; &#x27;);</span><br><span class="line">    v7 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v6, &#x27;k&#x27;);</span><br><span class="line">    v8 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v7, &#x27;e&#x27;);</span><br><span class="line">    v9 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v8, &#x27;y&#x27;);</span><br><span class="line">    v10 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v9, &#x27; &#x27;);</span><br><span class="line">    v11 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v10, &#x27;i&#x27;);</span><br><span class="line">    v12 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v11, &#x27;s&#x27;);</span><br><span class="line">    v13 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v12, &#x27; &#x27;);</span><br><span class="line">    v14 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v13, &#x27;v&#x27;);</span><br><span class="line">    v15 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v14, &#x27;a&#x27;);</span><br><span class="line">    v16 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v15, &#x27;l&#x27;);</span><br><span class="line">    v17 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v16, &#x27;i&#x27;);</span><br><span class="line">    v18 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v17, &#x27;d&#x27;);</span><br><span class="line">    v19 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v18, &#x27; &#x27;);</span><br><span class="line">    v20 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v19, &#x27;:&#x27;);</span><br><span class="line">    v21 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v20, &#x27;)&#x27;);</span><br><span class="line">    std::ostream::operator&lt;&lt;(v21, &amp;std::endl&lt;char,std::char_traits&lt;char&gt;&gt;);</span><br><span class="line">    return 0;</span><br><span class="line">  &#125;</span><br><span class="line">  else</span><br><span class="line">  &#123;</span><br><span class="line">    v23 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(&amp;std::cout, 73LL);</span><br><span class="line">    v24 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v23, 110LL);</span><br><span class="line">    v25 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v24, 118LL);</span><br><span class="line">    v26 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v25, 97LL);</span><br><span class="line">    v27 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v26, 108LL);</span><br><span class="line">    v28 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v27, 105LL);</span><br><span class="line">    v29 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v28, 100LL);</span><br><span class="line">    v30 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v29, 32LL);</span><br><span class="line">    v31 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v30, 75LL);</span><br><span class="line">    v32 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v31, 101LL);</span><br><span class="line">    v33 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v32, 121LL);</span><br><span class="line">    v34 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v33, 33LL);</span><br><span class="line">    v35 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v34, 32LL);</span><br><span class="line">    v36 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v35, 58LL);</span><br><span class="line">    v37 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(v36, 40LL);</span><br><span class="line">    std::ostream::operator&lt;&lt;(v37, &amp;std::endl&lt;char,std::char_traits&lt;char&gt;&gt;);</span><br><span class="line">    return 0;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第49行调用md5加密，整理得加密后的字符串为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">780438d5b6e29db0898bc4f0225935c0</span><br></pre></td></tr></table></figure>
+
+<p>在线解密</p>
+<p><img src="/2022/02/15/dmd-50/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-15%20154517.png"></p>
+<p>从类型中可知，这是进行了2次md5解密，所以flag就是将grape进行md5加密一次</p>
+<p><img src="/2022/02/15/dmd-50/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-15%20154939.png"></p>
+<p>得flag即为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">b781cbb29054db12f88f08c6e161c199</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>getit</title>
+    <url>/2022/01/03/getit/</url>
+    <content><![CDATA[<h2 id="攻防世界getit"><a href="#攻防世界getit" class="headerlink" title="攻防世界getit"></a>攻防世界<a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=0&id=5082&page=1">getit</a></h2><p>查壳，无壳，为64为elf文件</p>
+<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201618.png"></p>
+<span id="more"></span>
+
+<p>main函数如图所示，意思是生成一个flag，将它写入flag.txt，并最后将文件删除，所以我们只需要找到要写入flag.txt前的flag即可</p>
+<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201818.png"></p>
+<p>查看对应汇编代码，注意到这部分的strlen，和fseek即对应写入文件前的代码</p>
+<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20202303.png"></p>
+<p>用pwndbg在0x400832处下断点，即可查看flag的值</p>
+<p><img src="/2022/01/03/getit/Screenshot_2022-01-02_07-25-43.png"></p>
+<p>其中，edi寄存器保存处理后的数据的内存地址，而该地址中的数据即为flag</p>
+]]></content>
+      <categories>
+        <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>no-strings-attached</title>
+    <url>/2021/12/31/no-strings-attached/</url>
+    <content><![CDATA[<h2 id="攻防世界-no-strings-attached"><a href="#攻防世界-no-strings-attached" class="headerlink" title="攻防世界 no-strings-attached"></a>攻防世界 <a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=0&id=5080&page=1">no-strings-attached</a></h2><p>32位文件，用ida打开后可以ctrl+f找到main函数，其中authenticate中包含加密函数</p>
+<p><img src="/2021/12/31/no-strings-attached/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-12-31%20104222.png"></p>
+<span id="more"></span>
+
+<p><img src="/2021/12/31/no-strings-attached/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-12-31%20104903.png"></p>
+<p>查找authenticate的汇编指令，我们注意到，加密函数的运算结果被保留到eax寄存器中</p>
+<p><img src="/2021/12/31/no-strings-attached/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-12-31%20105226.png"></p>
+<p>可以使用动态调试的方法</p>
+<p>首先运行gdb</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gdb ./no-strings-attached</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/12/31/no-strings-attached/Screenshot_2021-12-30_22-05-35.png"></p>
+<p>然后在decrypt函数前下断点</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">b decrypt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/12/31/no-strings-attached/Screenshot_2021-12-30_22-06-04.png"></p>
+<p>运行程序</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">r</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/12/31/no-strings-attached/Screenshot_2021-12-30_22-06-24.png"></p>
+<p>运行一步</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">n</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/12/31/no-strings-attached/Screenshot_2021-12-30_22-06-40.png"></p>
+<p>按照之前的分析，此时运行结果已经存到eax寄存器中，所以我们要做的就是读取eax寄存器中的值，关于命令的解释参考如下</p>
+<p><a href="http://c.biancheng.net/view/7470.html">GDB查看内存 (biancheng.net)</a></p>
+<p><a href="https://visualgdb.com/gdbreference/commands/x">GDB Command Reference - x command (visualgdb.com)</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x/200wx $eax</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/12/31/no-strings-attached/Screenshot_2021-12-30_22-06-55.png"></p>
+<p>运行如下脚本即得flag</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">key = &quot;393434377b796f755f6172655f616e5f696e7465726e6174696f6e616c5f6d7973746572797d&quot;</span><br><span class="line">flag = bytes.fromhex(key)</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/12/31/no-strings-attached/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-12-31%20143731.png"></p>
+]]></content>
+      <categories>
+        <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>re4-unvm-me</title>
+    <url>/2022/01/11/re4-unvm-me/</url>
+    <content><![CDATA[<h2 id="攻防世界-re4-unvm-me"><a href="#攻防世界-re4-unvm-me" class="headerlink" title="攻防世界-re4-unvm-me"></a>攻防世界-<a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=1&id=5033&page=1">re4-unvm-me</a></h2><p>下载文件为pyc文件，通过uncompyle6将其反编译为py文件，其中uncompyle6支持python2.6-3.8</p>
+<p><img src="/2022/01/11/re4-unvm-me/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-11%20151300.png"></p>
+<span id="more"></span>
+
+<p>文件代码如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># uncompyle6 version 3.7.4</span><br><span class="line"># Python bytecode 2.7 (62211)</span><br><span class="line"># Decompiled from: Python 3.7.9 (tags/v3.7.9:13c94747c7, Aug 17 2020, 18:58:18) [MSC v.1900 64 bit (AMD64)]</span><br><span class="line"># Embedded file name: unvm_me.py</span><br><span class="line"># Compiled at: 2016-12-21 05:44:01</span><br><span class="line">import md5</span><br><span class="line">md5s = [</span><br><span class="line"> 174282896860968005525213562254350376167, 137092044126081477479435678296496849608, 126300127609096051658061491018211963916, 314989972419727999226545215739316729360, 256525866025901597224592941642385934114, 115141138810151571209618282728408211053, 8705973470942652577929336993839061582, 256697681645515528548061291580728800189, 39818552652170274340851144295913091599, 65313561977812018046200997898904313350, 230909080238053318105407334248228870753, 196125799557195268866757688147870815374, 74874145132345503095307276614727915885]</span><br><span class="line">print &#x27;Can you turn me back to python ? ...&#x27;</span><br><span class="line">flag = raw_input(&#x27;well as you wish.. what is the flag: &#x27;)</span><br><span class="line">if len(flag) &gt; 69:</span><br><span class="line">    print &#x27;nice try&#x27;</span><br><span class="line">    exit()</span><br><span class="line">if len(flag) % 5 != 0:</span><br><span class="line">    print &#x27;nice try&#x27;</span><br><span class="line">    exit()</span><br><span class="line">for i in range(0, len(flag), 5):</span><br><span class="line">    s = flag[i:i + 5]</span><br><span class="line">    if int(&#x27;0x&#x27; + md5.new(s).hexdigest(), 16) != md5s[(i / 5)]:</span><br><span class="line">        print &#x27;nice try&#x27;</span><br><span class="line">        exit()</span><br><span class="line"></span><br><span class="line">print &#x27;Congratz now you have the flag&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>将md5s中的挨个解密即得flag</p>
+<p>在线解密网站</p>
+<p><a href="https://pmd5.com/">md5解密 MD5在线解密 破解md5 (pmd5.com)</a> &#x2F;&#x2F;免费</p>
+<p><a href="https://cmd5.com/">md5在线解密破解,md5解密加密 (cmd5.com)</a> &#x2F;&#x2F;部分收费</p>
+<p>最终求得flag</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ALEXCTF&#123;dv5d4s2vj8nk43s8d8l6m1n5l67ds9v41n52nv37j481h3d28n4b6v3k&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从kali虚拟机向windows主机传程序步骤</title>
+    <url>/2021/12/31/%E4%BB%8Ekali%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%91windows%E4%B8%BB%E6%9C%BA%E4%BC%A0%E7%A8%8B%E5%BA%8F%E6%AD%A5%E9%AA%A4%E2%80%9C/</url>
+    <content><![CDATA[<p>检查ssh服务状态，并将其开启</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo service ssh status</span><br></pre></td></tr></table></figure>
+
+<p>如果没有安装，则使用命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>如果已安装但服务未启动，则使用命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo service ssh start</span><br></pre></td></tr></table></figure>
+
+<p>如果已经按照了Xftp程序，此时可以用Xftp连接虚拟机，直接传递文件，具体步骤可参考韩顺平老师的教程</p>
+<p>此外，也可以打开cmd用cd命令进入到文件将要被下载到的位置</p>
+<p>使用scp命令</p>
+<p>示例如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scp kali@192.168.46.128:/home/kali/Pictures/hello.png .</span><br></pre></td></tr></table></figure>
+
+<p>其中192.168.46.128为kali的ip地址，可在kali中使用ip ad命令或ifconfig命令查看</p>
+<p>&#x2F;home&#x2F;kali&#x2F;Pictures为文件在kali中的地址</p>
+<p>hello.png为文件名</p>
+<p> .不可少且前有空格</p>
+]]></content>
+      <categories>
+        <category>知识总结</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>复旦白泽暑期课程逆向入门课wp</title>
+    <url>/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/</url>
+    <content><![CDATA[<h2 id="re2"><a href="#re2" class="headerlink" title="re2"></a>re2</h2><p>首先用ida64打开re2文件，定位到main函数</p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/main.png"></p>
+<span id="more"></span>
+
+<p>f5反汇编得到如下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">__int64 __fastcall main(int a1, char **a2, char **a3)</span><br><span class="line">&#123;</span><br><span class="line">  unsigned int v3; // eax</span><br><span class="line">  __int64 result; // rax</span><br><span class="line">  unsigned int v5; // [rsp+4h] [rbp-1Ch]</span><br><span class="line">  unsigned int v6; // [rsp+8h] [rbp-18h]</span><br><span class="line">  unsigned int v7; // [rsp+Ch] [rbp-14h]</span><br><span class="line">  unsigned int v8; // [rsp+10h] [rbp-10h]</span><br><span class="line">  unsigned int v9; // [rsp+14h] [rbp-Ch]</span><br><span class="line">  int v10; // [rsp+18h] [rbp-8h]</span><br><span class="line"></span><br><span class="line">  puts(&quot;hi all ----------------------&quot;);</span><br><span class="line">  puts(&quot;Welcome to dice game!&quot;);</span><br><span class="line">  puts(&quot;You have to roll 5 dices and get 6, 6, 6, 6, 6 in order.&quot;);</span><br><span class="line">  puts(&quot;Press enter to roll.&quot;);</span><br><span class="line">  getchar();</span><br><span class="line">  v3 = time(0LL);</span><br><span class="line">  srand(v3);</span><br><span class="line">  v10 = time(0LL);</span><br><span class="line">  v9 = rand() % 6 + 1;</span><br><span class="line">  v8 = rand() % 6 + 1;</span><br><span class="line">  v7 = rand() % 6 + 1;</span><br><span class="line">  v6 = rand() % 6 + 1;</span><br><span class="line">  v5 = rand() % 6 + 1;</span><br><span class="line">  printf(&quot;You rolled %d, %d, %d, %d, %d.\n&quot;, v9, v8, v7, v6, v5);</span><br><span class="line">  if ( v9 != 6 )</span><br><span class="line">    goto LABEL_15;</span><br><span class="line">  if ( time(0LL) - v10 &gt; 2 )</span><br><span class="line">    goto LABEL_13;</span><br><span class="line">  if ( v8 != 6 )</span><br><span class="line">    goto LABEL_15;</span><br><span class="line">  if ( time(0LL) - v10 &gt; 2 )</span><br><span class="line">    goto LABEL_13;</span><br><span class="line">  if ( v7 != 6 )</span><br><span class="line">    goto LABEL_15;</span><br><span class="line">  if ( time(0LL) - v10 &gt; 2 )</span><br><span class="line">    goto LABEL_13;</span><br><span class="line">  if ( v6 != 6 )</span><br><span class="line">    goto LABEL_15;</span><br><span class="line">  if ( time(0LL) - v10 &gt; 2 )</span><br><span class="line">    goto LABEL_13;</span><br><span class="line">  if ( v5 == 6 )</span><br><span class="line">  &#123;</span><br><span class="line">    if ( time(0LL) - v10 &gt; 2 )</span><br><span class="line">    &#123;</span><br><span class="line">LABEL_13:</span><br><span class="line">      puts(&quot;No cheat!&quot;);</span><br><span class="line">      return 0xFFFFFFFFLL;</span><br><span class="line">    &#125;</span><br><span class="line">    puts(&quot;You rolled as I said! I&#x27;ll give you the flag.&quot;);</span><br><span class="line">    sub_4006B6();</span><br><span class="line">    result = 0LL;</span><br><span class="line">  &#125;</span><br><span class="line">  else</span><br><span class="line">  &#123;</span><br><span class="line">LABEL_15:</span><br><span class="line">    puts(&quot;You DID NOT roll as I said!&quot;);</span><br><span class="line">    puts(&quot;Bye bye~&quot;);</span><br><span class="line">    result = 0xFFFFFFFFLL;</span><br><span class="line">  &#125;</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>分析得知，这是一个摇骰子的游戏，v5到v9是1到6的时间种子随机数，要求v5到v9都是6，且time(0LL) - v10 &gt; 2两个条件都满足才能执行 sub_4006B6()函数，输出正确的flag，而v10 &#x3D; time(0LL)，所以第二个条件无法满足，想到用patch的方法修改判断条件</p>
+<p>查看对应汇编代码我们能找到如下指令</p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/tiaojian1.png"></p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/tiaojian2.png"></p>
+<p>类似的条件共有5组，第一个条件对应摇出数字6，第二个条件对应time(0LL) - v10 &gt; 2，现更改汇编，使第一类跳转不执行，第二类跳转均执行，使用keypatcher插件，将第一个条件中的6改为0，由于随机数的范围是1到6所以一定与0不等，再将jnz改为jz，则跳转一定不执行，将第二个条件中的jle改为jmp，则跳转一定执行，如下图所示</p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/keypatcher.png"></p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/patch1.png"></p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/patch2.png"></p>
+<p>将5组条件均进行相同的修改，然后保存</p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/baocun.png"></p>
+<p>将保存后的re2文件放在linux下执行，运行得到flag</p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/flag_re2.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flag&#123;4b34098e229eab72739923a0b40b3be6&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="re3"><a href="#re3" class="headerlink" title="re3"></a>re3</h2><p>首先用ida64打开re3文件，定位到main函数，f5得到如下伪代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">![re3_address](%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_address.png)__int64 __fastcall main(int a1, char **a2, char **a3)</span><br><span class="line">&#123;</span><br><span class="line">  __int64 v3; // rbx</span><br><span class="line">  int v4; // eax</span><br><span class="line">  char v5; // bp</span><br><span class="line">  char v6; // al</span><br><span class="line">  const char *v7; // rdi</span><br><span class="line">  unsigned int v9; // [rsp+0h] [rbp-28h] BYREF</span><br><span class="line">  int v10[9]; // [rsp+4h] [rbp-24h] BYREF</span><br><span class="line"></span><br><span class="line">  v10[0] = 0;</span><br><span class="line">  v9 = 0;</span><br><span class="line">  puts(&quot;Give  flag:&quot;);</span><br><span class="line">  scanf(&quot;%s&quot;, &amp;s1);</span><br><span class="line">  if ( strlen(&amp;s1) != 26 || strncmp(&amp;s1, &quot;flag&#123;&quot;, 5uLL) || *(&amp;byte_6010BF + 26) != 125 )</span><br><span class="line">  &#123;</span><br><span class="line">LABEL_22:</span><br><span class="line">    puts(&quot;Wrong flag!&quot;);</span><br><span class="line">    exit(-1);</span><br><span class="line">  &#125;</span><br><span class="line">  v3 = 5LL;</span><br><span class="line">  if ( strlen(&amp;s1) - 1 &gt; 5 )</span><br><span class="line">  &#123;</span><br><span class="line">    while ( 1 )</span><br><span class="line">    &#123;</span><br><span class="line">      v4 = *(&amp;s1 + v3);</span><br><span class="line">      v5 = 0;</span><br><span class="line">      if ( v4 &gt; 67 )</span><br><span class="line">      &#123;</span><br><span class="line">        if ( (unsigned __int8)v4 == 68 )</span><br><span class="line">        &#123;</span><br><span class="line">          v6 = sub_400650(v10);</span><br><span class="line">          goto LABEL_14;</span><br><span class="line">        &#125;</span><br><span class="line">        if ( (unsigned __int8)v4 == 69 )</span><br><span class="line">        &#123;</span><br><span class="line">          v6 = sub_400660(v10);</span><br><span class="line">          goto LABEL_14;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      else</span><br><span class="line">      &#123;</span><br><span class="line">        if ( (unsigned __int8)v4 == 65 )</span><br><span class="line">        &#123;</span><br><span class="line">          v6 = sub_400670(&amp;v9);</span><br><span class="line">          goto LABEL_14;</span><br><span class="line">        &#125;</span><br><span class="line">        if ( (unsigned __int8)v4 == 66 )</span><br><span class="line">        &#123;</span><br><span class="line">          v6 = sub_400680(&amp;v9);</span><br><span class="line">LABEL_14:</span><br><span class="line">          v5 = v6;</span><br><span class="line">          goto LABEL_15;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">LABEL_15:</span><br><span class="line">      if ( !(unsigned __int8)sub_400690(asc_601060, (unsigned int)v10[0], v9) )</span><br><span class="line">        goto LABEL_22;</span><br><span class="line">      if ( ++v3 &gt;= strlen(&amp;s1) - 1 )</span><br><span class="line">      &#123;</span><br><span class="line">        if ( v5 )</span><br><span class="line">          break;</span><br><span class="line">LABEL_20:</span><br><span class="line">        v7 = &quot;Wrong flag!&quot;;</span><br><span class="line">        goto LABEL_21;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  if ( asc_601060[8 * v9 + v10[0]] != 42 )</span><br><span class="line">    goto LABEL_20;</span><br><span class="line">  v7 = &quot;Congratulations!&quot;;</span><br><span class="line">LABEL_21:</span><br><span class="line">  puts(v7);</span><br><span class="line">  return 0LL;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序大体逻辑是输出一个Give  flag:，然后将我们输入的字符串长度为26，存入s1数组，根据判断条件知s1数组的前五位为flag{先随意试一下</p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_try.png"></p>
+<p>双击byte_6010BF，发现它是s1的前一位，则*(&amp;byte_6010BF + 26)对应s1的最后一位，利用ida可将125转换为对应的字符”}”</p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_address.png"></p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/char.png"></p>
+<p>那我们的任务就是判断剩下的20个字符，它们存储在v4数组中，利用转换字符的功能，可以将68、69、65、66依次转换为D、E、A、B，继续分析，我们注意到判断flag正确与否的关键在这个地方</p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_key.png"></p>
+<p>双击asc_601060发现它是这样的字符串</p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_maze.png"></p>
+<p>典型的迷宫问题，42对应”*”，这个字符即为出口，根据asc_601060[8 * v9 + v10[0]]，判断出迷宫的行号对应v9，列号对应v10[0]，且每行有8列，先把迷宫整理一下，为便于观察用”#”代替” “</p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/maze.png"></p>
+<p>将v9、v10[0]改名为row、column，根据函数判断出</p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/sxzy.png"></p>
+<p>再根据第57行的sub_400690函数判断出空格和*可走</p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/panduan.png"></p>
+<p>则得出flag为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flag&#123;EBEEBBDBBBEEEEAADAAE&#125;</span><br></pre></td></tr></table></figure>
+
+<p>验证</p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re3_flag.png"></p>
+<h2 id="re1思考题"><a href="#re1思考题" class="headerlink" title="re1思考题"></a>re1思考题</h2><p>由于scanf %s有可能造成溢出，且程序中没有对输入字符串的长度进行检验，所以在正确的flag后，加上任意的字符也会puts(“you are right!”)</p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/scanf.png"></p>
+<p><img src="/2021/07/18/%E5%A4%8D%E6%97%A6%E7%99%BD%E6%B3%BD%E6%9A%91%E6%9C%9F%E8%AF%BE%E7%A8%8B%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E8%AF%BEwp/re1_bug.png"></p>
+]]></content>
+      <categories>
+        <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>攻防世界Babyre</title>
+    <url>/2022/02/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CBabyre/</url>
+    <content><![CDATA[<h2 id="攻防世界Babyre"><a href="#攻防世界Babyre" class="headerlink" title="攻防世界Babyre"></a>攻防世界<a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=1&id=4662&page=1">Babyre</a></h2><p><img src="/2022/02/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CBabyre/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-09%20154137.png"></p>
+<p>关键在于judge函数,judge函数无法正确反编译，显然是被加密了，main函数第8行即为加密过程</p>
+<span id="more"></span>
+
+<p><img src="/2022/02/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CBabyre/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-09%20154437.png"></p>
+<p>方法一：用ida python解密</p>
+<p>已知judge函数的起始地址为0x600B00，且已知judge函数共182个字节，可以用ida python还原加密前的judge函数</p>
+<p><img src="/2022/02/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CBabyre/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-09%20161641.png"></p>
+<p>运行如上脚本，发现数值发生了变化</p>
+<p><img src="/2022/02/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CBabyre/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-09%20161758.png"></p>
+<p>然后按U（取消原来定义），再按 C（重新生成汇编代码），按P（重新生成 function）后即可f5反编译，得到加密前的judge函数</p>
+<p><img src="/2022/02/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CBabyre/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-09%20162051.png"></p>
+<p>脚本如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">v2_str = &#x27;fmcd&#x27;</span><br><span class="line">v2 = []</span><br><span class="line">for x in v2_str:</span><br><span class="line">    v2.append(ord(x))</span><br><span class="line">v2.append(127)</span><br><span class="line">v3 = &#x27;k7d;V`;np&#x27;</span><br><span class="line">for x in v3:</span><br><span class="line">    v2.append(ord(x))</span><br><span class="line">for i in range(0,14):</span><br><span class="line">    v2[i] ^= i</span><br><span class="line">for i in v2:</span><br><span class="line">    print(chr(i),end=&#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>运行既得flag</p>
+<p><img src="/2022/02/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CBabyre/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-09%20164050.png"></p>
+<p>方法二：注意到main函数的第8行即为解密judge函数的过程，所以可以采用动态调试的方法求解judge函数</p>
+<p>由于文件为elf文件，所以将ida的dbgsrv得linux_server64复制到linux虚拟机中，在ida种启动远程调试，断点下在12行即可</p>
+<p><img src="/2022/02/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CBabyre/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-09%20165405.png"></p>
+<p>此时judge函数已解密，双击进入</p>
+<p><img src="/2022/02/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CBabyre/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-09%20165538.png"></p>
+<p>同样执行U、C、P后按f5即可看到解密后的函数</p>
+<p><img src="/2022/02/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CBabyre/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-09%20165601.png"></p>
+]]></content>
+      <categories>
+        <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>攻防世界testre</title>
+    <url>/2022/02/19/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Ctestre/</url>
+    <content><![CDATA[<h2 id="Testre"><a href="#Testre" class="headerlink" title="Testre"></a><a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=1&id=5476&page=1">Testre</a></h2><p>用ida打开文件找到main函数可看到两个关键函数</p>
+<p><img src="/2022/02/19/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Ctestre/2022-02-18_174614.png"></p>
+<span id="more"></span>
+
+<p>查看函数sub_400D00（成功加载）</p>
+<p><img src="/2022/02/19/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Ctestre/2022-02-18_175804.png"></p>
+<p>再查看函数sub_400700，可以看到，函数十分复杂</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">__int64 __fastcall sub_400700(void *a1, _QWORD *a2, __int64 a3, size_t a4)</span><br><span class="line">&#123;</span><br><span class="line">  unsigned __int8 *v4; // rcx</span><br><span class="line">  _DWORD v6[2]; // [rsp+0h] [rbp-C0h] BYREF</span><br><span class="line">  int c; // [rsp+8h] [rbp-B8h]</span><br><span class="line">  char v8; // [rsp+Fh] [rbp-B1h]</span><br><span class="line">  int v9; // [rsp+10h] [rbp-B0h]</span><br><span class="line">  bool v10; // [rsp+17h] [rbp-A9h]</span><br><span class="line">  unsigned __int8 *v11; // [rsp+18h] [rbp-A8h]</span><br><span class="line">  char v12; // [rsp+27h] [rbp-99h]</span><br><span class="line">  int v13; // [rsp+28h] [rbp-98h]</span><br><span class="line">  int v14; // [rsp+2Ch] [rbp-94h]</span><br><span class="line">  unsigned __int64 i; // [rsp+30h] [rbp-90h]</span><br><span class="line">  size_t n; // [rsp+38h] [rbp-88h]</span><br><span class="line">  size_t v17; // [rsp+40h] [rbp-80h]</span><br><span class="line">  size_t v18; // [rsp+48h] [rbp-78h]</span><br><span class="line">  size_t j; // [rsp+50h] [rbp-70h]</span><br><span class="line">  size_t v20; // [rsp+58h] [rbp-68h]</span><br><span class="line">  int v21; // [rsp+64h] [rbp-5Ch]</span><br><span class="line">  unsigned __int64 v22; // [rsp+68h] [rbp-58h]</span><br><span class="line">  int v23; // [rsp+74h] [rbp-4Ch]</span><br><span class="line">  _DWORD *v24; // [rsp+78h] [rbp-48h]</span><br><span class="line">  __int64 v25; // [rsp+80h] [rbp-40h]</span><br><span class="line">  void *v26; // [rsp+88h] [rbp-38h]</span><br><span class="line">  int v27; // [rsp+94h] [rbp-2Ch]</span><br><span class="line">  size_t v28; // [rsp+98h] [rbp-28h]</span><br><span class="line">  __int64 v29; // [rsp+A0h] [rbp-20h]</span><br><span class="line">  _QWORD *v30; // [rsp+A8h] [rbp-18h]</span><br><span class="line">  void *s; // [rsp+B0h] [rbp-10h]</span><br><span class="line">  char v32; // [rsp+BFh] [rbp-1h]</span><br><span class="line">  </span><br><span class="line">  s = a1;</span><br><span class="line">  v30 = a2;</span><br><span class="line">  v29 = a3;</span><br><span class="line">  v28 = a4;</span><br><span class="line">  v27 = -559038737;</span><br><span class="line">  v26 = malloc(0x100uLL);</span><br><span class="line">  v25 = v29;</span><br><span class="line">  v24 = v6;</span><br><span class="line">  v22 = 0LL;</span><br><span class="line">  v17 = 0LL;</span><br><span class="line">  for ( i = 0LL; i &lt; v28; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v13 = *(unsigned __int8 *)(v25 + i);</span><br><span class="line">    *((_BYTE *)v26 + i) = byte_400E90[i % 0x1D] ^ v13;</span><br><span class="line">    *((_BYTE *)v26 + i) += *(_BYTE *)(v25 + i);</span><br><span class="line">  &#125;</span><br><span class="line">  while ( 1 )</span><br><span class="line">  &#123;</span><br><span class="line">    v12 = 0;</span><br><span class="line">    if ( v17 &lt; v28 )</span><br><span class="line">      v12 = ~(*(_BYTE *)(v25 + v17) != 0);</span><br><span class="line">    if ( (v12 &amp; 1) == 0 )</span><br><span class="line">      break;</span><br><span class="line">    ++v17;</span><br><span class="line">  &#125;</span><br><span class="line">  n = 138 * (v28 - v17) / 0x64 + 1;</span><br><span class="line">  v23 = ((v17 + v28) &lt;&lt; 6) / 0x30 - 1;</span><br><span class="line">  v11 = (unsigned __int8 *)v6 - ((138 * (v28 - v17) / 0x64 + 16) &amp; 0xFFFFFFFFFFFFFFF0LL);</span><br><span class="line">  memset(v11, 0, n);</span><br><span class="line">  v20 = v17;</span><br><span class="line">  v18 = n - 1;</span><br><span class="line">  while ( v20 &lt; v28 )</span><br><span class="line">  &#123;</span><br><span class="line">    v21 = *(unsigned __int8 *)(v25 + v20);</span><br><span class="line">    for ( j = n - 1; ; --j )</span><br><span class="line">    &#123;</span><br><span class="line">      v10 = 1;</span><br><span class="line">      if ( j &lt;= v18 )</span><br><span class="line">        v10 = v21 != 0;</span><br><span class="line">      if ( !v10 )</span><br><span class="line">        break;</span><br><span class="line">      v22 = v11[j] &lt;&lt; 6;</span><br><span class="line">      v21 += v11[j] &lt;&lt; 8;</span><br><span class="line">      v9 = 64;</span><br><span class="line">      v11[j] = v21 % 58;</span><br><span class="line">      *((_BYTE *)v26 + j) = v22 &amp; 0x3F;</span><br><span class="line">      v22 &gt;&gt;= 6;</span><br><span class="line">      v21 /= 58;</span><br><span class="line">      v27 /= v9;</span><br><span class="line">      if ( !j )</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    ++v20;</span><br><span class="line">    v18 = j;</span><br><span class="line">  &#125;</span><br><span class="line">  for ( j = 0LL; ; ++j )</span><br><span class="line">  &#123;</span><br><span class="line">    v8 = 0;</span><br><span class="line">    if ( j &lt; n )</span><br><span class="line">      v8 = ~(v11[j] != 0);</span><br><span class="line">    if ( (v8 &amp; 1) == 0 )</span><br><span class="line">      break;</span><br><span class="line">  &#125;</span><br><span class="line">  if ( *v30 &gt; n + v17 - j )</span><br><span class="line">  &#123;</span><br><span class="line">    if ( v17 )</span><br><span class="line">    &#123;</span><br><span class="line">      c = 61;</span><br><span class="line">      memset(s, 49, v17);</span><br><span class="line">      memset(v26, c, v17);</span><br><span class="line">    &#125;</span><br><span class="line">    v20 = v17;</span><br><span class="line">    while ( j &lt; n )</span><br><span class="line">    &#123;</span><br><span class="line">      v4 = v11;</span><br><span class="line">      *((_BYTE *)s + v20) = byte_400EB0[v11[j]];</span><br><span class="line">      *((_BYTE *)v26 + v20++) = byte_400EF0[v4[j++]];</span><br><span class="line">    &#125;</span><br><span class="line">    *((_BYTE *)s + v20) = 0;</span><br><span class="line">    *v30 = v20 + 1;</span><br><span class="line">    if ( !strncmp((const char *)s, &quot;D9&quot;, 2uLL)</span><br><span class="line">      &amp;&amp; !strncmp((const char *)s + 20, &quot;Mp&quot;, 2uLL)</span><br><span class="line">      &amp;&amp; !strncmp((const char *)s + 18, &quot;MR&quot;, 2uLL)</span><br><span class="line">      &amp;&amp; !strncmp((const char *)s + 2, &quot;cS9N&quot;, 4uLL)</span><br><span class="line">      &amp;&amp; !strncmp((const char *)s + 6, &quot;9iHjM&quot;, 5uLL)</span><br><span class="line">      &amp;&amp; !strncmp((const char *)s + 11, &quot;LTdA8YS&quot;, 7uLL) )</span><br><span class="line">    &#123;</span><br><span class="line">      v6[1] = puts(&quot;correct!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    v32 = 1;</span><br><span class="line">    v14 = 1;</span><br><span class="line">  &#125;</span><br><span class="line">  else</span><br><span class="line">  &#123;</span><br><span class="line">    *v30 = n + v17 - j + 1;</span><br><span class="line">    v32 = 0;</span><br><span class="line">    v14 = 1;</span><br><span class="line">  &#125;</span><br><span class="line">  return v32 &amp; 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+</search>
