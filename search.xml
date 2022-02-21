@@ -167,28 +167,6 @@
       </tags>
   </entry>
   <entry>
-    <title>getit</title>
-    <url>/2022/01/03/getit/</url>
-    <content><![CDATA[<h2 id="攻防世界getit"><a href="#攻防世界getit" class="headerlink" title="攻防世界getit"></a>攻防世界<a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=0&id=5082&page=1">getit</a></h2><p>查壳，无壳，为64为elf文件</p>
-<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201618.png"></p>
-<span id="more"></span>
-
-<p>main函数如图所示，意思是生成一个flag，将它写入flag.txt，并最后将文件删除，所以我们只需要找到要写入flag.txt前的flag即可</p>
-<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201818.png"></p>
-<p>查看对应汇编代码，注意到这部分的strlen，和fseek即对应写入文件前的代码</p>
-<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20202303.png"></p>
-<p>用pwndbg在0x400832处下断点，即可查看flag的值</p>
-<p><img src="/2022/01/03/getit/Screenshot_2022-01-02_07-25-43.png"></p>
-<p>其中，edi寄存器保存处理后的数据的内存地址，而该地址中的数据即为flag</p>
-]]></content>
-      <categories>
-        <category>CTF刷题记录</category>
-      </categories>
-      <tags>
-        <tag>ctf</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>dmd-50</title>
     <url>/2022/02/15/dmd-50/</url>
     <content><![CDATA[<h2 id="dmd-50"><a href="#dmd-50" class="headerlink" title="dmd-50"></a><a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=1&id=4959&page=1">dmd-50</a></h2><p>64位elf文件</p>
@@ -208,6 +186,28 @@
 <p>得flag即为</p>
 <figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">b<span class="number">781</span>cbb<span class="number">29054</span>db<span class="number">12</span>f<span class="number">88</span>f<span class="number">08</span><span class="keyword">c</span><span class="number">6e161</span><span class="keyword">c</span><span class="number">199</span></span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>getit</title>
+    <url>/2022/01/03/getit/</url>
+    <content><![CDATA[<h2 id="攻防世界getit"><a href="#攻防世界getit" class="headerlink" title="攻防世界getit"></a>攻防世界<a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=0&id=5082&page=1">getit</a></h2><p>查壳，无壳，为64为elf文件</p>
+<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201618.png"></p>
+<span id="more"></span>
+
+<p>main函数如图所示，意思是生成一个flag，将它写入flag.txt，并最后将文件删除，所以我们只需要找到要写入flag.txt前的flag即可</p>
+<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201818.png"></p>
+<p>查看对应汇编代码，注意到这部分的strlen，和fseek即对应写入文件前的代码</p>
+<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20202303.png"></p>
+<p>用pwndbg在0x400832处下断点，即可查看flag的值</p>
+<p><img src="/2022/01/03/getit/Screenshot_2022-01-02_07-25-43.png"></p>
+<p>其中，edi寄存器保存处理后的数据的内存地址，而该地址中的数据即为flag</p>
 ]]></content>
       <categories>
         <category>CTF刷题记录</category>
@@ -256,38 +256,6 @@
 ]]></content>
       <categories>
         <category>CTF刷题记录</category>
-      </categories>
-      <tags>
-        <tag>ctf</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>从kali虚拟机向windows主机传程序步骤</title>
-    <url>/2021/12/31/%E4%BB%8Ekali%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%91windows%E4%B8%BB%E6%9C%BA%E4%BC%A0%E7%A8%8B%E5%BA%8F%E6%AD%A5%E9%AA%A4%E2%80%9C/</url>
-    <content><![CDATA[<p>检查ssh服务状态，并将其开启</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">sudo service ssh status</span></span><br></pre></td></tr></table></figure>
-
-<p>如果没有安装，则使用命令</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> install openssh-<span class="keyword">server</span></span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>如果已安装但服务未启动，则使用命令</p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">sudo service ssh <span class="literal">start</span></span><br></pre></td></tr></table></figure>
-
-<p>如果已经按照了Xftp程序，此时可以用Xftp连接虚拟机，直接传递文件，具体步骤可参考韩顺平老师的教程</p>
-<p>此外，也可以打开cmd用cd命令进入到文件将要被下载到的位置</p>
-<p>使用scp命令</p>
-<p>示例如下</p>
-<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">scp kali<span class="variable">@192</span>.<span class="number">168.46</span>.<span class="number">128</span><span class="symbol">:/home/kali/Pictures/hello</span>.png .</span><br></pre></td></tr></table></figure>
-
-<p>其中192.168.46.128为kali的ip地址，可在kali中使用ip ad命令或ifconfig命令查看</p>
-<p>&#x2F;home&#x2F;kali&#x2F;Pictures为文件在kali中的地址</p>
-<p>hello.png为文件名</p>
-<p> .不可少且前有空格</p>
-]]></content>
-      <categories>
-        <category>知识总结</category>
       </categories>
       <tags>
         <tag>ctf</tag>
