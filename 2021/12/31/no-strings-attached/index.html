@@ -263,29 +263,29 @@
 <p><img src="/2021/12/31/no-strings-attached/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-12-31%20105226.png"></p>
 <p>可以使用动态调试的方法</p>
 <p>首先运行gdb</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb ./no-strings-attached</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">gdb</span> ./<span class="literal">no</span>-strings-attached</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/12/31/no-strings-attached/Screenshot_2021-12-30_22-05-35.png"></p>
 <p>然后在decrypt函数前下断点</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b decrypt</span><br></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">b</span> decrypt</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/12/31/no-strings-attached/Screenshot_2021-12-30_22-06-04.png"></p>
 <p>运行程序</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r</span><br></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">r</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/12/31/no-strings-attached/Screenshot_2021-12-30_22-06-24.png"></p>
 <p>运行一步</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n</span><br></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">n</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/12/31/no-strings-attached/Screenshot_2021-12-30_22-06-40.png"></p>
 <p>按照之前的分析，此时运行结果已经存到eax寄存器中，所以我们要做的就是读取eax寄存器中的值，关于命令的解释参考如下</p>
 <p><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/7470.html">GDB查看内存 (biancheng.net)</a></p>
 <p><a target="_blank" rel="noopener" href="https://visualgdb.com/gdbreference/commands/x">GDB Command Reference - x command (visualgdb.com)</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x/200wx $eax</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">x</span>/<span class="number">200</span>wx $eax</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/12/31/no-strings-attached/Screenshot_2021-12-30_22-06-55.png"></p>
 <p>运行如下脚本即得flag</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">key = &quot;393434377b796f755f6172655f616e5f696e7465726e6174696f6e616c5f6d7973746572797d&quot;</span><br><span class="line">flag = bytes.fromhex(key)</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">key</span> <span class="operator">=</span> <span class="string">&quot;393434377b796f755f6172655f616e5f696e7465726e6174696f6e616c5f6d7973746572797d&quot;</span></span><br><span class="line"><span class="attribute">flag</span> <span class="operator">=</span> bytes.fromhex(key)</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/12/31/no-strings-attached/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-12-31%20143731.png"></p>
 

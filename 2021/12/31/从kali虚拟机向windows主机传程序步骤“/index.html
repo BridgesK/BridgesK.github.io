@@ -245,21 +245,21 @@
 
       
         <p>检查ssh服务状态，并将其开启</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service ssh status</span><br></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo service ssh status</span></span><br></pre></td></tr></table></figure>
 
 <p>如果没有安装，则使用命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> install openssh-<span class="keyword">server</span></span><br></pre></td></tr></table></figure>
 
 <span id="more"></span>
 
 <p>如果已安装但服务未启动，则使用命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service ssh start</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service ssh <span class="literal">start</span></span><br></pre></td></tr></table></figure>
 
 <p>如果已经按照了Xftp程序，此时可以用Xftp连接虚拟机，直接传递文件，具体步骤可参考韩顺平老师的教程</p>
 <p>此外，也可以打开cmd用cd命令进入到文件将要被下载到的位置</p>
 <p>使用scp命令</p>
 <p>示例如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp kali@192.168.46.128:/home/kali/Pictures/hello.png .</span><br></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp kali<span class="variable">@192</span>.<span class="number">168.46</span>.<span class="number">128</span><span class="symbol">:/home/kali/Pictures/hello</span>.png .</span><br></pre></td></tr></table></figure>
 
 <p>其中192.168.46.128为kali的ip地址，可在kali中使用ip ad命令或ifconfig命令查看</p>
 <p>&#x2F;home&#x2F;kali&#x2F;Pictures为文件在kali中的地址</p>
