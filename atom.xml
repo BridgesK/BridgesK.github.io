@@ -6,7 +6,7 @@
   <link href="https://bridgesk.github.io/atom.xml" rel="self"/>
   
   <link href="https://bridgesk.github.io/"/>
-  <updated>2022-02-21T07:06:15.195Z</updated>
+  <updated>2022-02-22T14:20:28.408Z</updated>
   <id>https://bridgesk.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>攻防世界gametime</title>
+    <link href="https://bridgesk.github.io/2022/02/23/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cgametime/"/>
+    <id>https://bridgesk.github.io/2022/02/23/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cgametime/</id>
+    <published>2022-02-22T20:50:40.000Z</published>
+    <updated>2022-02-22T14:20:28.408Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Gametime"><a href="#Gametime" class="headerlink" title="Gametime"></a><a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=1&id=5005&page=2">Gametime</a></h2><p>这是一道有趣的游戏题，运行程序，它会先跟你介绍规则，如果看到s的话就按空格键，如果看到x的话就按x键，如果看到m的话就按m键，如果手速够快的话可以通过玩游戏通关，作为一道逆向题的话我用了两种作法</p><p><img src="/2022/02/23/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cgametime/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-22%20205613.png"></p><span id="more"></span><p>做法一：动态调试，我用的工具为x32dbg，这里也是学习了别人的思路</p><p>“通过刚刚玩游戏发现程序有输入的地方，那么我们猜测这个题的做法：F8的时候程序一定会在某个地方停住，下断点，重新载入，F9，在下断点的地方按F7，进入跟踪，然后F8……，一直循环，直到发现有用的函数。”</p><p>程序载入x32dbg</p><p><img src="/2022/02/23/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cgametime/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-22%20211324.png"></p><p>F8单步走，走到不能动的地方下断点</p><p><img src="/2022/02/23/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cgametime/2022-02-22_212406.png"></p><p>Ctrl+F2重新载入，F9，然后F7进入函数</p><p>然后一直F8走到不能动的地方，再下一个断点</p><p><img src="/2022/02/23/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cgametime/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-22%20213327.png"></p><p>再重新载入，F9到下的第一个断点处，现在我们可以把这里的断点去掉了。然后F9到第二个断点处。</p><p>重复上面的操作，直到找到输出s的函数，如下</p><p><img src="/2022/02/23/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cgametime/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-22%20215420.png"></p><p>执行call gametime.301260时，程序会输出s，并检测输入，如果输入空格，则当程序执行完test al,al，ZF标志位会置1，下一条jne指令就会跳转，如果输入错误就会跳转失败，继续执行就会输出错误语句，当然，我们可以随便输入，只要在执行jne语句前手动将ZF标志位置1即可</p><p>上图为练习环节的关键函数，调试程序就会发现无论是输出s还是x，m，都是通过调用gametime.301260函数实现的，都会跳转到上图下断点的指令</p><p><img src="/2022/02/23/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cgametime/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-22%20220655.png"></p><p>这段是正式游戏阶段的关键函数，可以看到，还是调用了gametime.301260函数，不过指令的地址不同，通过在这两个位置下断点，不断运行并保证jne跳转始终执行就能得到最终的flag</p><p><img src="/2022/02/23/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cgametime/2022-02-22_200636.png"></p><p>方法二：patch程序</p><p>引用官方wp(直呼学到了)</p><p><img src="/2022/02/23/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cgametime/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-22%20221256.png"></p><p>将下图中的jne改为je(另外一处做相同操作)，再Apply patches to input file，再执行程序，只要错误输入或不输入就能得到正确的flag</p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Gametime&quot;&gt;&lt;a href=&quot;#Gametime&quot; class=&quot;headerlink&quot; title=&quot;Gametime&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://adworld.xctf.org.cn/task/answer?type=reverse&amp;number=4&amp;grade=1&amp;id=5005&amp;page=2&quot;&gt;Gametime&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;这是一道有趣的游戏题，运行程序，它会先跟你介绍规则，如果看到s的话就按空格键，如果看到x的话就按x键，如果看到m的话就按m键，如果手速够快的话可以通过玩游戏通关，作为一道逆向题的话我用了两种作法&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2022/02/23/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cgametime/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-22%20205613.png&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="CTF刷题记录" scheme="https://bridgesk.github.io/categories/CTF%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="ctf" scheme="https://bridgesk.github.io/tags/ctf/"/>
+    
+  </entry>
   
   <entry>
     <title>从kali虚拟机向windows主机传程序步骤</title>
