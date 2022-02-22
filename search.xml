@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>2021红帽杯签到题--EBCDIC</title>
-    <url>/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/</url>
-    <content><![CDATA[<h2 id="2021红帽杯签到题–EBCDIC"><a href="#2021红帽杯签到题–EBCDIC" class="headerlink" title="2021红帽杯签到题–EBCDIC"></a>2021红帽杯签到题–EBCDIC</h2><p>打开文件</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">啌亣捆咇凁攨mｐm檯剤仯蝠蝰?</span><br></pre></td></tr></table></figure>
-
-<p>用kali转码，将ebcdic编码转位ascii编码</p>
-<p><img src="/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/hello.png"></p>
-<span id="more"></span>
-
-<p><img src="/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/good.png"></p>
-<p>打开FILE.txt即得flag</p>
-]]></content>
-      <categories>
-        <category>CTF赛题总结</category>
-      </categories>
-      <tags>
-        <tag>ctf</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Guess-the-Number</title>
     <url>/2022/01/21/Guess-the-Number/</url>
     <content><![CDATA[<h2 id="Guess-the-Number"><a href="#Guess-the-Number" class="headerlink" title="Guess-the-Number"></a><a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=1&id=4908&page=1">Guess-the-Number</a></h2><p>得到jar文件，用<a href="http://java-decompiler.github.io/">jd-gui</a>反编译得到如下源码</p>
@@ -36,6 +16,26 @@
 ]]></content>
       <categories>
         <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2021红帽杯签到题--EBCDIC</title>
+    <url>/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/</url>
+    <content><![CDATA[<h2 id="2021红帽杯签到题–EBCDIC"><a href="#2021红帽杯签到题–EBCDIC" class="headerlink" title="2021红帽杯签到题–EBCDIC"></a>2021红帽杯签到题–EBCDIC</h2><p>打开文件</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">啌亣捆咇凁攨mｐm檯剤仯蝠蝰?</span><br></pre></td></tr></table></figure>
+
+<p>用kali转码，将ebcdic编码转位ascii编码</p>
+<p><img src="/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/hello.png"></p>
+<span id="more"></span>
+
+<p><img src="/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/good.png"></p>
+<p>打开FILE.txt即得flag</p>
+]]></content>
+      <categories>
+        <category>CTF赛题总结</category>
       </categories>
       <tags>
         <tag>ctf</tag>
@@ -217,6 +217,31 @@
       </tags>
   </entry>
   <entry>
+    <title>re4-unvm-me</title>
+    <url>/2022/01/11/re4-unvm-me/</url>
+    <content><![CDATA[<h2 id="攻防世界-re4-unvm-me"><a href="#攻防世界-re4-unvm-me" class="headerlink" title="攻防世界-re4-unvm-me"></a>攻防世界-<a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=1&id=5033&page=1">re4-unvm-me</a></h2><p>下载文件为pyc文件，通过uncompyle6将其反编译为py文件，其中uncompyle6支持python2.6-3.8</p>
+<p><img src="/2022/01/11/re4-unvm-me/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-11%20151300.png"></p>
+<span id="more"></span>
+
+<p>文件代码如下</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="comment"># uncompyle6 version 3.7.4</span></span><br><span class="line"><span class="comment"># Python bytecode 2.7 (62211)</span></span><br><span class="line"><span class="comment"># Decompiled from: Python 3.7.9 (tags/v3.7.9:13c94747c7, Aug 17 2020, 18:58:18) [MSC v.1900 64 bit (AMD64)]</span></span><br><span class="line"><span class="comment"># Embedded file name: unvm_me.py</span></span><br><span class="line"><span class="comment"># Compiled at: 2016-12-21 05:44:01</span></span><br><span class="line">import md5</span><br><span class="line">md5s = [</span><br><span class="line"> <span class="number">174282896860968005525213562254350376167</span>, <span class="number">137092044126081477479435678296496849608</span>, <span class="number">126300127609096051658061491018211963916</span>, <span class="number">314989972419727999226545215739316729360</span>, <span class="number">256525866025901597224592941642385934114</span>, <span class="number">115141138810151571209618282728408211053</span>, <span class="number">8705973470942652577929336993839061582</span>, <span class="number">256697681645515528548061291580728800189</span>, <span class="number">39818552652170274340851144295913091599</span>, <span class="number">65313561977812018046200997898904313350</span>, <span class="number">230909080238053318105407334248228870753</span>, <span class="number">196125799557195268866757688147870815374</span>, <span class="number">74874145132345503095307276614727915885</span>]</span><br><span class="line">print <span class="string">&#x27;Can you turn me back to python ? ...&#x27;</span></span><br><span class="line">flag = raw_input(<span class="string">&#x27;well as you wish.. what is the flag: &#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> len(flag) &gt; <span class="number">69</span>:</span><br><span class="line">    print <span class="string">&#x27;nice try&#x27;</span></span><br><span class="line">    <span class="keyword">exit</span>()</span><br><span class="line"><span class="keyword">if</span> len(flag) % <span class="number">5</span> != <span class="number">0</span>:</span><br><span class="line">    print <span class="string">&#x27;nice try&#x27;</span></span><br><span class="line">    <span class="keyword">exit</span>()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(flag), <span class="number">5</span>):</span><br><span class="line">    s = flag[i:i + <span class="number">5</span>]</span><br><span class="line">    <span class="keyword">if</span> int(<span class="string">&#x27;0x&#x27;</span> + md5.new(s).hexdigest(), <span class="number">16</span>) != md5s[(i / <span class="number">5</span>)]:</span><br><span class="line">        print <span class="string">&#x27;nice try&#x27;</span></span><br><span class="line">        <span class="keyword">exit</span>()</span><br><span class="line"></span><br><span class="line">print <span class="string">&#x27;Congratz now you have the flag&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>将md5s中的挨个解密即得flag</p>
+<p>在线解密网站</p>
+<p><a href="https://pmd5.com/">md5解密 MD5在线解密 破解md5 (pmd5.com)</a> &#x2F;&#x2F;免费</p>
+<p><a href="https://cmd5.com/">md5在线解密破解,md5解密加密 (cmd5.com)</a> &#x2F;&#x2F;部分收费</p>
+<p>最终求得flag</p>
+<figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">ALEXCTF&#123;dv<span class="number">5</span>d<span class="number">4</span>s<span class="number">2</span>vj<span class="number">8</span><span class="symbol">nk43</span>s<span class="number">8</span>d<span class="number">8</span>l<span class="number">6</span><span class="name">m1</span><span class="symbol">n5</span>l<span class="number">67</span>ds<span class="number">9</span>v<span class="number">41</span><span class="symbol">n52</span><span class="symbol">nv37</span>j<span class="number">481</span>h<span class="number">3</span>d<span class="number">28</span><span class="symbol">n4</span>b<span class="number">6</span>v<span class="number">3</span>k&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>no-strings-attached</title>
     <url>/2021/12/31/no-strings-attached/</url>
     <content><![CDATA[<h2 id="攻防世界-no-strings-attached"><a href="#攻防世界-no-strings-attached" class="headerlink" title="攻防世界 no-strings-attached"></a>攻防世界 <a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=0&id=5080&page=1">no-strings-attached</a></h2><p>32位文件，用ida打开后可以ctrl+f找到main函数，其中authenticate中包含加密函数</p>
@@ -256,64 +281,6 @@
 ]]></content>
       <categories>
         <category>CTF刷题记录</category>
-      </categories>
-      <tags>
-        <tag>ctf</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>re4-unvm-me</title>
-    <url>/2022/01/11/re4-unvm-me/</url>
-    <content><![CDATA[<h2 id="攻防世界-re4-unvm-me"><a href="#攻防世界-re4-unvm-me" class="headerlink" title="攻防世界-re4-unvm-me"></a>攻防世界-<a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=1&id=5033&page=1">re4-unvm-me</a></h2><p>下载文件为pyc文件，通过uncompyle6将其反编译为py文件，其中uncompyle6支持python2.6-3.8</p>
-<p><img src="/2022/01/11/re4-unvm-me/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-11%20151300.png"></p>
-<span id="more"></span>
-
-<p>文件代码如下</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="comment"># uncompyle6 version 3.7.4</span></span><br><span class="line"><span class="comment"># Python bytecode 2.7 (62211)</span></span><br><span class="line"><span class="comment"># Decompiled from: Python 3.7.9 (tags/v3.7.9:13c94747c7, Aug 17 2020, 18:58:18) [MSC v.1900 64 bit (AMD64)]</span></span><br><span class="line"><span class="comment"># Embedded file name: unvm_me.py</span></span><br><span class="line"><span class="comment"># Compiled at: 2016-12-21 05:44:01</span></span><br><span class="line">import md5</span><br><span class="line">md5s = [</span><br><span class="line"> <span class="number">174282896860968005525213562254350376167</span>, <span class="number">137092044126081477479435678296496849608</span>, <span class="number">126300127609096051658061491018211963916</span>, <span class="number">314989972419727999226545215739316729360</span>, <span class="number">256525866025901597224592941642385934114</span>, <span class="number">115141138810151571209618282728408211053</span>, <span class="number">8705973470942652577929336993839061582</span>, <span class="number">256697681645515528548061291580728800189</span>, <span class="number">39818552652170274340851144295913091599</span>, <span class="number">65313561977812018046200997898904313350</span>, <span class="number">230909080238053318105407334248228870753</span>, <span class="number">196125799557195268866757688147870815374</span>, <span class="number">74874145132345503095307276614727915885</span>]</span><br><span class="line">print <span class="string">&#x27;Can you turn me back to python ? ...&#x27;</span></span><br><span class="line">flag = raw_input(<span class="string">&#x27;well as you wish.. what is the flag: &#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> len(flag) &gt; <span class="number">69</span>:</span><br><span class="line">    print <span class="string">&#x27;nice try&#x27;</span></span><br><span class="line">    <span class="keyword">exit</span>()</span><br><span class="line"><span class="keyword">if</span> len(flag) % <span class="number">5</span> != <span class="number">0</span>:</span><br><span class="line">    print <span class="string">&#x27;nice try&#x27;</span></span><br><span class="line">    <span class="keyword">exit</span>()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(flag), <span class="number">5</span>):</span><br><span class="line">    s = flag[i:i + <span class="number">5</span>]</span><br><span class="line">    <span class="keyword">if</span> int(<span class="string">&#x27;0x&#x27;</span> + md5.new(s).hexdigest(), <span class="number">16</span>) != md5s[(i / <span class="number">5</span>)]:</span><br><span class="line">        print <span class="string">&#x27;nice try&#x27;</span></span><br><span class="line">        <span class="keyword">exit</span>()</span><br><span class="line"></span><br><span class="line">print <span class="string">&#x27;Congratz now you have the flag&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>将md5s中的挨个解密即得flag</p>
-<p>在线解密网站</p>
-<p><a href="https://pmd5.com/">md5解密 MD5在线解密 破解md5 (pmd5.com)</a> &#x2F;&#x2F;免费</p>
-<p><a href="https://cmd5.com/">md5在线解密破解,md5解密加密 (cmd5.com)</a> &#x2F;&#x2F;部分收费</p>
-<p>最终求得flag</p>
-<figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">ALEXCTF&#123;dv<span class="number">5</span>d<span class="number">4</span>s<span class="number">2</span>vj<span class="number">8</span><span class="symbol">nk43</span>s<span class="number">8</span>d<span class="number">8</span>l<span class="number">6</span><span class="name">m1</span><span class="symbol">n5</span>l<span class="number">67</span>ds<span class="number">9</span>v<span class="number">41</span><span class="symbol">n52</span><span class="symbol">nv37</span>j<span class="number">481</span>h<span class="number">3</span>d<span class="number">28</span><span class="symbol">n4</span>b<span class="number">6</span>v<span class="number">3</span>k&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>CTF刷题记录</category>
-      </categories>
-      <tags>
-        <tag>ctf</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>从kali虚拟机向windows主机传程序步骤</title>
-    <url>/2022/02/21/%E4%BB%8Ekali%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%91windows%E4%B8%BB%E6%9C%BA%E4%BC%A0%E7%A8%8B%E5%BA%8F%E6%AD%A5%E9%AA%A4/</url>
-    <content><![CDATA[<p>检查ssh服务状态，并将其开启</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">sudo service ssh status</span></span><br></pre></td></tr></table></figure>
-
-<p>如果没有安装，则使用命令</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> install openssh-<span class="keyword">server</span></span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>如果已安装但服务未启动，则使用命令</p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">sudo service ssh <span class="literal">start</span></span><br></pre></td></tr></table></figure>
-
-<p>如果已经按照了Xftp程序，此时可以用Xftp连接虚拟机，直接传递文件，具体步骤可参考韩顺平老师的教程</p>
-<p><img src="/2022/02/21/%E4%BB%8Ekali%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%91windows%E4%B8%BB%E6%9C%BA%E4%BC%A0%E7%A8%8B%E5%BA%8F%E6%AD%A5%E9%AA%A4/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-21%20144223.png"></p>
-<p>此外，也可以打开cmd用cd命令进入到文件将要被下载到的位置</p>
-<p>使用scp命令</p>
-<p>示例如下</p>
-<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">scp kali<span class="variable">@192</span>.<span class="number">168.46</span>.<span class="number">128</span><span class="symbol">:/home/kali/Pictures/hello</span>.png .</span><br></pre></td></tr></table></figure>
-
-<p>其中192.168.46.128为kali的ip地址，可在kali中使用ip ad命令或ifconfig命令查看</p>
-<p>&#x2F;home&#x2F;kali&#x2F;Pictures为文件在kali中的地址</p>
-<p>hello.png为文件名</p>
-<p> .不可少且前有空格</p>
-]]></content>
-      <categories>
-        <category>知识总结</category>
       </categories>
       <tags>
         <tag>ctf</tag>
@@ -407,6 +374,39 @@
 ]]></content>
       <categories>
         <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从kali虚拟机向windows主机传程序步骤</title>
+    <url>/2022/02/21/%E4%BB%8Ekali%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%91windows%E4%B8%BB%E6%9C%BA%E4%BC%A0%E7%A8%8B%E5%BA%8F%E6%AD%A5%E9%AA%A4/</url>
+    <content><![CDATA[<p>检查ssh服务状态，并将其开启</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">sudo service ssh status</span></span><br></pre></td></tr></table></figure>
+
+<p>如果没有安装，则使用命令</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> install openssh-<span class="keyword">server</span></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>如果已安装但服务未启动，则使用命令</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">sudo service ssh <span class="literal">start</span></span><br></pre></td></tr></table></figure>
+
+<p>如果已经按照了Xftp程序，此时可以用Xftp连接虚拟机，直接传递文件，具体步骤可参考韩顺平老师的教程</p>
+<p><img src="/2022/02/21/%E4%BB%8Ekali%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%91windows%E4%B8%BB%E6%9C%BA%E4%BC%A0%E7%A8%8B%E5%BA%8F%E6%AD%A5%E9%AA%A4/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-21%20144223.png"></p>
+<p>此外，也可以打开cmd用cd命令进入到文件将要被下载到的位置</p>
+<p>使用scp命令</p>
+<p>示例如下</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">scp kali<span class="variable">@192</span>.<span class="number">168.46</span>.<span class="number">128</span><span class="symbol">:/home/kali/Pictures/hello</span>.png .</span><br></pre></td></tr></table></figure>
+
+<p>其中192.168.46.128为kali的ip地址，可在kali中使用ip ad命令或ifconfig命令查看</p>
+<p>&#x2F;home&#x2F;kali&#x2F;Pictures为文件在kali中的地址</p>
+<p>hello.png为文件名</p>
+<p> .不可少且前有空格</p>
+]]></content>
+      <categories>
+        <category>知识总结</category>
       </categories>
       <tags>
         <tag>ctf</tag>
