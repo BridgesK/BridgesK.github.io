@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bridgesk.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[**DigitalCircuits**](CTF&#x2F;DigitalCircuits.zip at main · BridgesK&#x2F;CTF (github.com))该文件为python打包成的exe文件，可以用如下方法判断： 1、python打包成的文件通常的图标都是python模样  2、用ExeinfoPe查看文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SUSCTF2022复盘">
+<meta property="og:url" content="https://bridgesk.github.io/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/index.html">
+<meta property="og:site_name" content="Bridgesk&#39;s Blog">
+<meta property="og:description" content="[**DigitalCircuits**](CTF&#x2F;DigitalCircuits.zip at main · BridgesK&#x2F;CTF (github.com))该文件为python打包成的exe文件，可以用如下方法判断： 1、python打包成的文件通常的图标都是python模样  2、用ExeinfoPe查看文件">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bridgesk.github.io/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-02-28_165243.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-02-28_165435.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-02-28_170533.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-02-28_171524.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-28%20172255.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-28%20172446.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-02-28_172633.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-28%20173222.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-28%20174012.png">
+<meta property="og:image" content="https://bridgesk.github.io/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-28%20174224.png">
+<meta property="og:image" content="https://bridgesk.github.io/AppData/Roaming/Typora/typora-user-images/image-20220228174425767.png">
+<meta property="article:published_time" content="2022-02-28T16:19:41.000Z">
+<meta property="article:modified_time" content="2022-02-28T10:12:29.552Z">
+<meta property="article:author" content="Bridgesk">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bridgesk.github.io/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-02-28_165243.png">
+
+<link rel="canonical" href="https://bridgesk.github.io/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SUSCTF2022复盘 | Bridgesk's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Bridgesk's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bridgesk's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bridgesk.github.io/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bridgesk">
+      <meta itemprop="description" content="记录学习与生活">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bridgesk's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SUSCTF2022复盘
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-02-28 16:19:41 / 修改时间：10:12:29" itemprop="dateCreated datePublished" datetime="2022-02-28T16:19:41Z">2022-02-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF%E8%B5%9B%E9%A2%98%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">CTF赛题总结</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="DigitalCircuits-CTF-x2F-DigitalCircuits-zip-at-main-·-BridgesK-x2F-CTF-github-com"><a href="#DigitalCircuits-CTF-x2F-DigitalCircuits-zip-at-main-·-BridgesK-x2F-CTF-github-com" class="headerlink" title="[**DigitalCircuits**](CTF&#x2F;DigitalCircuits.zip at main · BridgesK&#x2F;CTF (github.com))"></a>[**DigitalCircuits**](<a target="_blank" rel="noopener" href="https://github.com/BridgesK/CTF/blob/main/susctf2022_re/DigitalCircuits.zip">CTF&#x2F;DigitalCircuits.zip at main · BridgesK&#x2F;CTF (github.com)</a>)</h2><p>该文件为python打包成的exe文件，可以用如下方法判断：</p>
+<p>1、python打包成的文件通常的图标都是python模样</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-02-28_165243.png"></p>
+<p>2、用ExeinfoPe查看文件</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-02-28_165435.png"></p>
+<span id="more"></span>
+
+<p>3、ida载入文件，shift+f12查看字符串</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-02-28_170533.png"></p>
+<p>判断出这一点，接下来我们的任务就是将.exe文件反编译出python源码了</p>
+<p>参考这篇文章：(<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1872447">别再问我exe反编译成Python脚本了！ - 云+社区 - 腾讯云 (tencent.com)</a>)</p>
+<p>首先通过<a target="_blank" rel="noopener" href="https://github.com/countercept/Python-exe-unpacker">pyinstxtractor.py</a>脚本提取pyc文件，引用参考文章中的方法</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-02-28_171524.png"></p>
+<p>执行命令</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">python</span> pyinstxtractor.<span class="keyword">py</span> DigitalCircuits.<span class="keyword">exe</span></span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-28%20172255.png"></p>
+<p>生成了一个名为DigitalCircuits.exe_extracted的文件夹</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-28%20172446.png"></p>
+<p>在文件夹内可以找到与可执行文件同名的.pyc文件，不过需要手动补后缀</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-02-28_172633.png"></p>
+<p>下一步是还原文件头</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-28%20173222.png"></p>
+<p>将pyc文件与同目录下的struct文件用十六进制编辑器打开对比</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-28%20174012.png"></p>
+<p>发现缺少第一行的16个字节</p>
+<p>先插入16个字节，再将struct中的第一行复制到pyc文件中</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-02-28%20174224.png"></p>
+<p><img src="/../../../AppData/Roaming/Typora/typora-user-images/image-20220228174425767.png" alt="image-20220228174425767"></p>
+<p>保存，然后通过uncompyle6将pyc文件反编译为py文件</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uncompyle6 -o <span class="module-access"><span class="module"><span class="identifier">DigitalCircuits</span>.</span></span>py <span class="module-access"><span class="module"><span class="identifier">DigitalCircuits</span>.</span></span>pyc</span><br></pre></td></tr></table></figure>
+
+<p>代码如下，注释为个人分析</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"># uncompyle6 version <span class="number">3.7</span>.<span class="number">4</span></span><br><span class="line"># Python bytecode <span class="number">3.7</span> (<span class="number">3394</span>)</span><br><span class="line"># Decompiled <span class="selector-tag">from</span>: Python <span class="number">3.7</span>.<span class="number">9</span> (tags/v3.<span class="number">7.9</span>:<span class="number">13</span>c94747c7, Aug <span class="number">17</span> <span class="number">2020</span>, <span class="number">18</span>:<span class="number">58</span>:<span class="number">18</span>) [MSC v.<span class="number">1900</span> <span class="number">64</span> bit (AMD64)]</span><br><span class="line"># Embedded file name: DigitalCircuits.py</span><br><span class="line"># Compiled at: <span class="number">1995</span>-<span class="number">09</span>-<span class="number">28</span> <span class="number">00</span>:<span class="number">18</span>:<span class="number">56</span></span><br><span class="line"># Size of source mod <span class="number">2</span>**<span class="number">32</span>: <span class="number">257</span> bytes</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">def <span class="built_in">f1</span>(a, b):#与运算</span><br><span class="line">    if a == <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">        if b == <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">            return <span class="string">&#x27;1&#x27;</span></span><br><span class="line">    return <span class="string">&#x27;0&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f2</span>(a, b):#或运算</span><br><span class="line">    if a == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">        if b == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">            return <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    return <span class="string">&#x27;1&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f3</span>(a):#非运算</span><br><span class="line">    if a == <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">        return <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    if a == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">        return <span class="string">&#x27;1&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f4</span>(a, b):#异或运算</span><br><span class="line">    return <span class="built_in">f2</span>(<span class="built_in">f1</span>(a, <span class="built_in">f3</span>(b)), <span class="built_in">f1</span>(<span class="built_in">f3</span>(a), b))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f5</span>(x, y, z):#全加器，s为和，c为进位</span><br><span class="line">    s = <span class="built_in">f4</span>(<span class="built_in">f4</span>(x, y), z)</span><br><span class="line">    c = <span class="built_in">f2</span>(<span class="built_in">f1</span>(x, y), <span class="built_in">f1</span>(z, <span class="built_in">f2</span>(x, y)))</span><br><span class="line">    return (s, c)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f6</span>(a, b):</span><br><span class="line">    ans = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    z = <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    a = a[::-<span class="number">1</span>]#将a串逆序</span><br><span class="line">    b = b[::-<span class="number">1</span>]#将b串逆序</span><br><span class="line">    for i in <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">        ans += <span class="built_in">f5</span>(a[i], b[i], z)[<span class="number">0</span>]#按位相加存入ans</span><br><span class="line">        z = <span class="built_in">f5</span>(a[i], b[i], z)[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    return ans[::-<span class="number">1</span>]#返回ans的逆序</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f7</span>(a, n):</span><br><span class="line">    return a[n:] + <span class="string">&#x27;0&#x27;</span> * n</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f8</span>(a, n):</span><br><span class="line">    return n * <span class="string">&#x27;0&#x27;</span> + a[:-n]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f9</span>(a, b):</span><br><span class="line">    ans = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    for i in <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">        ans += <span class="built_in">f4</span>(a[i], b[i])</span><br><span class="line"></span><br><span class="line">    return ans</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f10</span>(v0, v1, k0, k1, k2, k3):#k0，k1，k2，k3均为常量，递归求解v0，v1</span><br><span class="line">    s = <span class="string">&#x27;00000000000000000000000000000000&#x27;</span></span><br><span class="line">    d = <span class="string">&#x27;10011110001101110111100110111001&#x27;</span></span><br><span class="line">    for i in <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">        s = <span class="built_in">f6</span>(s, d)</span><br><span class="line">        v0 = <span class="built_in">f6</span>(v0, <span class="built_in">f9</span>(<span class="built_in">f9</span>(<span class="built_in">f6</span>(<span class="built_in">f7</span>(v1, <span class="number">4</span>), k0), <span class="built_in">f6</span>(v1, s)), <span class="built_in">f6</span>(<span class="built_in">f8</span>(v1, <span class="number">5</span>), k1)))</span><br><span class="line">        v1 = <span class="built_in">f6</span>(v1, <span class="built_in">f9</span>(<span class="built_in">f9</span>(<span class="built_in">f6</span>(<span class="built_in">f7</span>(v0, <span class="number">4</span>), k2), <span class="built_in">f6</span>(v0, s)), <span class="built_in">f6</span>(<span class="built_in">f8</span>(v0, <span class="number">5</span>), k3)))</span><br><span class="line"></span><br><span class="line">    return v0 + v1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">k0 = <span class="string">&#x27;0100010001000101&#x27;</span>.<span class="built_in">zfill</span>(<span class="number">32</span>)</span><br><span class="line">k1 = <span class="string">&#x27;0100000101000100&#x27;</span>.<span class="built_in">zfill</span>(<span class="number">32</span>)</span><br><span class="line">k2 = <span class="string">&#x27;0100001001000101&#x27;</span>.<span class="built_in">zfill</span>(<span class="number">32</span>)</span><br><span class="line">k3 = <span class="string">&#x27;0100010101000110&#x27;</span>.<span class="built_in">zfill</span>(<span class="number">32</span>)</span><br><span class="line">flag = <span class="built_in">input</span>(<span class="string">&#x27;please input flag:&#x27;</span>)</span><br><span class="line">if flag[<span class="number">0</span>:<span class="number">7</span>] != <span class="string">&#x27;SUSCTF&#123;&#x27;</span> or flag[(-<span class="number">1</span>)] != <span class="string">&#x27;&#125;&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Error!!!The formate of flag is SUSCTF&#123;XXX&#125;&#x27;</span>)</span><br><span class="line">    time.<span class="built_in">sleep</span>(<span class="number">5</span>)</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>)</span><br><span class="line">flagstr = flag[<span class="number">7</span>:-<span class="number">1</span>]</span><br><span class="line">if <span class="built_in">len</span>(flagstr) != <span class="number">24</span>:#flagstr长度为<span class="number">24</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Error!!!The length of flag 24&#x27;</span>)</span><br><span class="line">    time.<span class="built_in">sleep</span>(<span class="number">5</span>)</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>)</span><br><span class="line">else:</span><br><span class="line">    res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    for i in <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(flagstr), <span class="number">8</span>):#每次传入flagstr中的<span class="number">8</span>位，共能循环<span class="number">3</span>次</span><br><span class="line">        v0 = flagstr[i:i + <span class="number">4</span>]</span><br><span class="line">        v0 = <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[i]))[<span class="number">2</span>:].<span class="built_in">zfill</span>(<span class="number">8</span>) + <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[(i + <span class="number">1</span>)]))[<span class="number">2</span>:].<span class="built_in">zfill</span>(<span class="number">8</span>) + <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[(i + <span class="number">2</span>)]))[<span class="number">2</span>:].<span class="built_in">zfill</span>(<span class="number">8</span>) + <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[(i + <span class="number">3</span>)]))[<span class="number">2</span>:].<span class="built_in">zfill</span>(<span class="number">8</span>)</span><br><span class="line">        v1 = <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[(i + <span class="number">4</span>)]))[<span class="number">2</span>:].<span class="built_in">zfill</span>(<span class="number">8</span>) + <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[(i + <span class="number">5</span>)]))[<span class="number">2</span>:].<span class="built_in">zfill</span>(<span class="number">8</span>) + <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[(i + <span class="number">6</span>)]))[<span class="number">2</span>:].<span class="built_in">zfill</span>(<span class="number">8</span>) + <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[(i + <span class="number">7</span>)]))[<span class="number">2</span>:].<span class="built_in">zfill</span>(<span class="number">8</span>)</span><br><span class="line">        res += <span class="built_in">f10</span>(v0, v1, k0, k1, k2, k3)</span><br><span class="line"></span><br><span class="line">    if res == <span class="string">&#x27;001111101000100101000111110010111100110010010100010001100011100100110001001101011000001110001000001110110000101101101000100100111101101001100010011100110110000100111011001011100110010000100111&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;True&#x27;</span>)</span><br><span class="line">    else:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;False&#x27;</span>)</span><br><span class="line">time.<span class="built_in">sleep</span>(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<p>解题脚本如下</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">def f1(<span class="selector-tag">a</span>, <span class="selector-tag">b</span>):#与运算</span><br><span class="line">    if a == <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">        if b == <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">            return <span class="string">&#x27;1&#x27;</span></span><br><span class="line">    return <span class="string">&#x27;0&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f2</span>(a, b):#或运算</span><br><span class="line">    if a == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">        if b == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">            return <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    return <span class="string">&#x27;1&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f3</span>(a):#非运算</span><br><span class="line">    if a == <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">        return <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    if a == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">        return <span class="string">&#x27;1&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f4</span>(a, b):#异或运算</span><br><span class="line">    return <span class="built_in">f2</span>(<span class="built_in">f1</span>(a, <span class="built_in">f3</span>(b)), <span class="built_in">f1</span>(<span class="built_in">f3</span>(a), b))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f5</span>(x, y, z):#全加器，s为和，c为进位</span><br><span class="line">    s = <span class="built_in">f4</span>(<span class="built_in">f4</span>(x, y), z)</span><br><span class="line">    c = <span class="built_in">f2</span>(<span class="built_in">f1</span>(x, y), <span class="built_in">f1</span>(z, <span class="built_in">f2</span>(x, y)))</span><br><span class="line">    return (s, c)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f6</span>(a, b):</span><br><span class="line">    ans = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    z = <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    a = a[::-<span class="number">1</span>] #a逆序</span><br><span class="line">    b = b[::-<span class="number">1</span>] #b逆序</span><br><span class="line">    for i in <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">        ans += <span class="built_in">f5</span>(a[i], b[i], z)[<span class="number">0</span>]</span><br><span class="line">        z = <span class="built_in">f5</span>(a[i], b[i], z)[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    return ans[::-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f6_decode</span>(a, c):#运用二进制运算的性质，通过补码求减</span><br><span class="line"></span><br><span class="line">    c = <span class="built_in">int</span>(c, <span class="number">2</span>) + (<span class="number">1</span> &lt;&lt; <span class="number">32</span>)</span><br><span class="line">    a = <span class="built_in">int</span>(a, <span class="number">2</span>)</span><br><span class="line">    b = (c - a) % (<span class="number">1</span> &lt;&lt; <span class="number">32</span>)</span><br><span class="line">    return <span class="built_in">str</span>(<span class="built_in">bin</span>(b)[<span class="number">2</span>:].<span class="built_in">zfill</span>(<span class="number">32</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f7</span>(a, n):#舍弃前n个元素，在末尾补<span class="number">0</span></span><br><span class="line">    return a[n:] + <span class="string">&#x27;0&#x27;</span> * n</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f8</span>(a, n):</span><br><span class="line">    return n * <span class="string">&#x27;0&#x27;</span> + a[:-n]#舍弃后n个元素，在开头补<span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f9</span>(a, b): #按位异或</span><br><span class="line">    ans = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    for i in <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">        ans += <span class="built_in">f4</span>(a[i], b[i])</span><br><span class="line"></span><br><span class="line">    return ans</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">f10</span>(v0, v1, k0, k1, k2, k3):</span><br><span class="line">    s = <span class="string">&#x27;00000000000000000000000000000000&#x27;</span></span><br><span class="line">    d = <span class="string">&#x27;10011110001101110111100110111001&#x27;</span></span><br><span class="line">    for i in <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">        s = <span class="built_in">f6</span>(s, d)</span><br><span class="line">        v0 = <span class="built_in">f6</span>(v0, <span class="built_in">f9</span>(<span class="built_in">f9</span>(<span class="built_in">f6</span>(<span class="built_in">f7</span>(v1, <span class="number">4</span>), k0), <span class="built_in">f6</span>(v1, s)), <span class="built_in">f6</span>(<span class="built_in">f8</span>(v1, <span class="number">5</span>), k1)))</span><br><span class="line">        v1 = <span class="built_in">f6</span>(v1, <span class="built_in">f9</span>(<span class="built_in">f9</span>(<span class="built_in">f6</span>(<span class="built_in">f7</span>(v0, <span class="number">4</span>), k2), <span class="built_in">f6</span>(v0, s)), <span class="built_in">f6</span>(<span class="built_in">f8</span>(v0, <span class="number">5</span>), k3)))</span><br><span class="line">    return v0+v1</span><br><span class="line"></span><br><span class="line">def <span class="built_in">f10_decode</span>(res, k0, k1, k2, k3):</span><br><span class="line">    v0 = res[<span class="number">0</span>:<span class="number">32</span>]</span><br><span class="line">    v1 = res[<span class="number">32</span>:<span class="number">64</span>]</span><br><span class="line">    s = <span class="string">&#x27;11000110111011110011011100100000&#x27;</span></span><br><span class="line">    d = <span class="string">&#x27;10011110001101110111100110111001&#x27;</span></span><br><span class="line">    for i in <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">        v1 = <span class="built_in">f6_decode</span>(<span class="built_in">f9</span>(<span class="built_in">f9</span>(<span class="built_in">f6</span>(<span class="built_in">f7</span>(v0, <span class="number">4</span>), k2), <span class="built_in">f6</span>(v0, s)), <span class="built_in">f6</span>(<span class="built_in">f8</span>(v0, <span class="number">5</span>), k3)), v1)</span><br><span class="line">        v0 = <span class="built_in">f6_decode</span>(<span class="built_in">f9</span>(<span class="built_in">f9</span>(<span class="built_in">f6</span>(<span class="built_in">f7</span>(v1, <span class="number">4</span>), k0), <span class="built_in">f6</span>(v1, s)), <span class="built_in">f6</span>(<span class="built_in">f8</span>(v1, <span class="number">5</span>), k1)), v0)</span><br><span class="line">        s = <span class="built_in">f6_decode</span>(d, s)</span><br><span class="line">    return v0+v1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">k0 = <span class="string">&#x27;0100010001000101&#x27;</span>.<span class="built_in">zfill</span>(<span class="number">32</span>) #Python <span class="built_in">zfill</span>() 方法返回指定长度的字符串，原字符串右对齐，前面填充</span><br><span class="line">k1 = <span class="string">&#x27;0100000101000100&#x27;</span>.<span class="built_in">zfill</span>(<span class="number">32</span>)</span><br><span class="line">k2 = <span class="string">&#x27;0100001001000101&#x27;</span>.<span class="built_in">zfill</span>(<span class="number">32</span>)</span><br><span class="line">k3 = <span class="string">&#x27;0100010101000110&#x27;</span>.<span class="built_in">zfill</span>(<span class="number">32</span>)</span><br><span class="line">res = <span class="string">&#x27;0011111010001001010001111100101111001100100101000100011000111001&#x27;</span>\</span><br><span class="line">      <span class="string">&#x27;0011000100110101100000111000100000111011000010110110100010010011&#x27;</span> \</span><br><span class="line">      <span class="string">&#x27;1101101001100010011100110110000100111011001011100110010000100111&#x27;</span></span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line">res1 = res[<span class="number">0</span>:<span class="number">64</span>]</span><br><span class="line">res2 = res[<span class="number">64</span>:<span class="number">128</span>]</span><br><span class="line">res3 = res[<span class="number">128</span>:<span class="number">192</span>]</span><br><span class="line">flag += <span class="built_in">f10_decode</span>(res1, k0, k1, k2, k3)</span><br><span class="line">flag += <span class="built_in">f10_decode</span>(res2, k0, k1, k2, k3)</span><br><span class="line">flag += <span class="built_in">f10_decode</span>(res3, k0, k1, k2, k3)</span><br><span class="line">for i in <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(flag), <span class="number">8</span>):</span><br><span class="line">    a = <span class="built_in">int</span>(flag[i:i+<span class="number">8</span>], <span class="number">2</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">chr</span>(a), end=<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ctf/" rel="tag"><i class="fa fa-tag"></i> ctf</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/23/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cgametime/" rel="prev" title="攻防世界gametime">
+      <i class="fa fa-chevron-left"></i> 攻防世界gametime
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalCircuits-CTF-x2F-DigitalCircuits-zip-at-main-%C2%B7-BridgesK-x2F-CTF-github-com"><span class="nav-number">1.</span> <span class="nav-text">[**DigitalCircuits**](CTF&#x2F;DigitalCircuits.zip at main · BridgesK&#x2F;CTF (github.com))</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Bridgesk</p>
+  <div class="site-description" itemprop="description">记录学习与生活</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bridgesk</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+<script src="/js/code-unfold.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
