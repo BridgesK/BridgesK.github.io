@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>2021红帽杯签到题--EBCDIC</title>
+    <url>/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/</url>
+    <content><![CDATA[<h2 id="2021红帽杯签到题–EBCDIC"><a href="#2021红帽杯签到题–EBCDIC" class="headerlink" title="2021红帽杯签到题–EBCDIC"></a>2021红帽杯签到题–EBCDIC</h2><p>打开文件</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">啌亣捆咇凁攨mｐm檯剤仯蝠蝰?</span><br></pre></td></tr></table></figure>
+
+<p>用kali转码，将ebcdic编码转位ascii编码</p>
+<p><img src="/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/hello.png"></p>
+<span id="more"></span>
+
+<p><img src="/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/good.png"></p>
+<p>打开FILE.txt即得flag</p>
+]]></content>
+      <categories>
+        <category>CTF赛题总结</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Guess-the-Number</title>
     <url>/2022/01/21/Guess-the-Number/</url>
     <content><![CDATA[<h2 id="Guess-the-Number"><a href="#Guess-the-Number" class="headerlink" title="Guess-the-Number"></a><a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=1&id=4908&page=1">Guess-the-Number</a></h2><p>得到jar文件，用<a href="http://java-decompiler.github.io/">jd-gui</a>反编译得到如下源码</p>
@@ -16,26 +36,6 @@
 ]]></content>
       <categories>
         <category>CTF刷题记录</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2021红帽杯签到题--EBCDIC</title>
-    <url>/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/</url>
-    <content><![CDATA[<h2 id="2021红帽杯签到题–EBCDIC"><a href="#2021红帽杯签到题–EBCDIC" class="headerlink" title="2021红帽杯签到题–EBCDIC"></a>2021红帽杯签到题–EBCDIC</h2><p>打开文件</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">啌亣捆咇凁攨mｐm檯剤仯蝠蝰?</span><br></pre></td></tr></table></figure>
-
-<p>用kali转码，将ebcdic编码转位ascii编码</p>
-<p><img src="/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/hello.png"></p>
-<span id="more"></span>
-
-<p><img src="/2021/07/09/2021%E7%BA%A2%E5%B8%BD%E6%9D%AF%E7%AD%BE%E5%88%B0%E9%A2%98-EBCDIC/good.png"></p>
-<p>打开FILE.txt即得flag</p>
-]]></content>
-      <categories>
-        <category>CTF赛题总结</category>
       </categories>
       <tags>
         <tag>CTF</tag>
@@ -283,6 +283,28 @@
       </tags>
   </entry>
   <entry>
+    <title>getit</title>
+    <url>/2022/01/03/getit/</url>
+    <content><![CDATA[<h2 id="攻防世界getit"><a href="#攻防世界getit" class="headerlink" title="攻防世界getit"></a>攻防世界<a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=0&id=5082&page=1">getit</a></h2><p>查壳，无壳，为64为elf文件</p>
+<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201618.png"></p>
+<span id="more"></span>
+
+<p>main函数如图所示，意思是生成一个flag，将它写入flag.txt，并最后将文件删除，所以我们只需要找到要写入flag.txt前的flag即可</p>
+<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201818.png"></p>
+<p>查看对应汇编代码，注意到这部分的strlen，和fseek即对应写入文件前的代码</p>
+<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20202303.png"></p>
+<p>用pwndbg在0x400832处下断点，即可查看flag的值</p>
+<p><img src="/2022/01/03/getit/Screenshot_2022-01-02_07-25-43.png"></p>
+<p>其中，edi寄存器保存处理后的数据的内存地址，而该地址中的数据即为flag</p>
+]]></content>
+      <categories>
+        <category>CTF刷题记录</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>no-strings-attached</title>
     <url>/2021/12/31/no-strings-attached/</url>
     <content><![CDATA[<h2 id="攻防世界-no-strings-attached"><a href="#攻防世界-no-strings-attached" class="headerlink" title="攻防世界 no-strings-attached"></a>攻防世界 <a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=0&id=5080&page=1">no-strings-attached</a></h2><p>32位文件，用ida打开后可以ctrl+f找到main函数，其中authenticate中包含加密函数</p>
@@ -319,28 +341,6 @@
 <figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">key</span> <span class="operator">=</span> <span class="string">&quot;393434377b796f755f6172655f616e5f696e7465726e6174696f6e616c5f6d7973746572797d&quot;</span></span><br><span class="line"><span class="attribute">flag</span> <span class="operator">=</span> bytes.fromhex(key)</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/12/31/no-strings-attached/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-12-31%20143731.png"></p>
-]]></content>
-      <categories>
-        <category>CTF刷题记录</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>getit</title>
-    <url>/2022/01/03/getit/</url>
-    <content><![CDATA[<h2 id="攻防世界getit"><a href="#攻防世界getit" class="headerlink" title="攻防世界getit"></a>攻防世界<a href="https://adworld.xctf.org.cn/task/answer?type=reverse&number=4&grade=0&id=5082&page=1">getit</a></h2><p>查壳，无壳，为64为elf文件</p>
-<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201618.png"></p>
-<span id="more"></span>
-
-<p>main函数如图所示，意思是生成一个flag，将它写入flag.txt，并最后将文件删除，所以我们只需要找到要写入flag.txt前的flag即可</p>
-<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20201818.png"></p>
-<p>查看对应汇编代码，注意到这部分的strlen，和fseek即对应写入文件前的代码</p>
-<p><img src="/2022/01/03/getit/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-01-02%20202303.png"></p>
-<p>用pwndbg在0x400832处下断点，即可查看flag的值</p>
-<p><img src="/2022/01/03/getit/Screenshot_2022-01-02_07-25-43.png"></p>
-<p>其中，edi寄存器保存处理后的数据的内存地址，而该地址中的数据即为flag</p>
 ]]></content>
       <categories>
         <category>CTF刷题记录</category>
