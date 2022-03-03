@@ -159,6 +159,33 @@
 <p>这里贴的是Dest0g3 Team的脚本</p>
 <figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">def tea_decode(enc, k):</span><br><span class="line">    v0 = enc[<span class="number">0</span>]</span><br><span class="line">    v1 = enc[<span class="number">1</span>]</span><br><span class="line">    sum = (delta*<span class="number">32</span>)<span class="meta">&amp;0xffffffff</span></span><br><span class="line">    for i in range(<span class="number">32</span>):</span><br><span class="line">        v1 -= ((v0&lt;&lt;<span class="number">4</span>) + k[<span class="number">2</span>]) ^ (v0 + sum) ^ ((v0&gt;&gt;<span class="number">5</span>) + k[<span class="number">3</span>])</span><br><span class="line">        v1 <span class="meta">&amp;= 0xffffffff</span></span><br><span class="line">        v0 -= ((v1&lt;&lt;<span class="number">4</span>) + k[<span class="number">0</span>]) ^ (v1 + sum) ^ ((v1&gt;&gt;<span class="number">5</span>) + k[<span class="number">1</span>])</span><br><span class="line">        v0 <span class="meta">&amp;= 0xffffffff</span></span><br><span class="line">        sum -= delta</span><br><span class="line">    return (v0, v1)</span><br><span class="line"></span><br><span class="line">enc = &#x27;<span class="number">00111110100010</span><span class="number">01010001111100</span><span class="number">10111100110010</span><span class="number">01010001000110</span><span class="number">00111001001100</span><span class="number">01001101011000</span><span class="number">00111000100000</span><span class="number">11101100001011</span><span class="number">01101000100100</span><span class="number">11110110100110</span><span class="number">00100111001101</span><span class="number">10000100111011</span><span class="number">00101110011001</span><span class="number">0000100111</span>&#x27;</span><br><span class="line">enc = [int(enc[i:i+<span class="number">32</span>], <span class="number">2</span>) for i in range(<span class="number">0</span>, len(enc), <span class="number">32</span>)]</span><br><span class="line"></span><br><span class="line">k = [<span class="number">0</span>]*<span class="number">4</span></span><br><span class="line">k[<span class="number">0</span>] = int(&#x27;<span class="number">01000100010001</span>01&#x27;.zfill(<span class="number">32</span>), <span class="number">2</span>)</span><br><span class="line">k[<span class="number">1</span>] = int(&#x27;<span class="number">01000001010001</span>00&#x27;.zfill(<span class="number">32</span>), <span class="number">2</span>)</span><br><span class="line">k[<span class="number">2</span>] = int(&#x27;<span class="number">01000010010001</span>01&#x27;.zfill(<span class="number">32</span>), <span class="number">2</span>)</span><br><span class="line">k[<span class="number">3</span>] = int(&#x27;<span class="number">01000101010001</span>10&#x27;.zfill(<span class="number">32</span>), <span class="number">2</span>)</span><br><span class="line">delta = int(&#x27;<span class="number">10011110001101</span><span class="number">11011110011011</span><span class="number">1001</span>&#x27;, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">flag = b&#x27;&#x27;</span><br><span class="line">for i in range(<span class="number">0</span>, len(enc), <span class="number">2</span>):</span><br><span class="line">    ans = tea_decode(enc[i:i+<span class="number">2</span>], k)</span><br><span class="line">    flag += ans[<span class="number">0</span>].to_bytes(<span class="number">4</span>, &#x27;big&#x27;)+ans[<span class="number">1</span>].to_bytes(<span class="number">4</span>, &#x27;big&#x27;)<span class="meta">#int.to_bytes(length, byteorder)</span></span><br><span class="line"></span><br><span class="line">print(b&#x27;SUSCTF&#123;&#x27;+flag+b&#x27;&#125;&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<h2 id="Hell-world"><a href="#Hell-world" class="headerlink" title="Hell_world"></a><a href="https://github.com/BridgesK/CTF/blob/main/susctf2022_re/hell_world.zip">Hell_world</a></h2><p>​    这道题比赛的时候没有思路，刚刚照着大佬们的wp复现了一下，虽然只是懂了个大概，但还是记录一下</p>
+<p>​    引用SU战队的话，“跟西湖论剑题目gghdl差不多 就是改了下case结构和数据可以根据<a href="http://blog.bluesadi.cn/2021/11/24/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91gghdl%E9%A2%98%E8%A7%A3/">链接</a>来解题”</p>
+<p>​    拿到程序，ida打开后首先shift+f12搜索字符串，search含有<code>flag</code></p>
+<p>的字符串</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-03-02%20175344.png"></p>
+<p>之后就是解析每个case函数的作用</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-03-03_125935.png"></p>
+<p>然后我们通过动态调试的方法找到读取输入的函数</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-03-03_132925.png"></p>
+<p>再分析case3</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-03-03_133221.png"></p>
+<p>如果输入长度是44位的话就执行case4，进而执行case9，所以推测case9是加密函数</p>
+<p>在分析case9之前，先查看输出正确的条件</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-03-03_134327.png"></p>
+<p>正确条件为*(_DWORD <em>)(a1 + 376) &#x3D;&#x3D; 44，因此我们需要查看修改</em>(_DWORD *)(a1 + 376) 值的位置，发现只在case11中出现</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-03-03_155124.png"></p>
+<p>追踪传入sub_7FF629329CC0函数的v74， v71，可以追踪到图中标出的关键函数，此函数在程序中共调用了3次，另外两次分别在case10和case9中，其中case9的该函数传入的为我们输入的数据(存在a1中)</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-03-03_160358.png"></p>
+<p>因此我们可以动态调试分析该函数的功能，传入字符串<code>0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUI</code></p>
+<p>运行case9中的sub_7FF629350180函数,查看对应的汇编代码</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-03-03_161602.png"></p>
+<p>查看函数返回值（存在rax寄存器中）</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/2022-03-03_161932.png"></p>
+<p>其中22332222即为传入字符串中0对应的二进制码00110000每位加二，所以函数的功能其实就是字符串转换为对应的二进制</p>
+<p>再查看sub_7FF629329CC0函数的汇编代码，发现就是异或运算</p>
+<p><img src="/2022/03/01/SUSCTF2022%E5%A4%8D%E7%9B%98/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-03-03%20162506.png"></p>
+<p>所以flag就是将dword_7FF629415B80和dword_7FF629415C50中的数据异或即可</p>
 ]]></content>
       <categories>
         <category>CTF赛题总结</category>
